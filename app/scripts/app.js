@@ -3,14 +3,14 @@
 /*global Backbone:true */
 'use strict';
 
-var Router = Backbone.Router.extend({
+var AppRouter = Backbone.Router.extend({
   routes: {
     '': 'home',
     'home': 'home',
-    'posts/:id': 'getBurgers',
+    'posts': 'getBurgers',
     'new-post': 'newBurger', // burgers
     'comments': 'getIngredients', // ingredients
-    'albums/:id': 'getOrders', // orders
+    'albums': 'getOrders', // orders
     'new-album': 'newOrder'
   },
 
@@ -23,33 +23,47 @@ var Router = Backbone.Router.extend({
   },
 
   getBurgers: function(){
+    $('#container').empty();
     $.ajax({
       url: 'http://jsonplaceholder.typicode.com/posts',
       type: 'GET'
     }).done(function(data){
       console.log(data);
+      var template = Handlebars.compile($('#burgerIndexTemplate').html());
+      $('#container').html(template({
+        posts: data
+      }));
     }).fail(function(err){
       console.log(err);
     });
   },
 
   getIngredients: function(){
+    $('#container').empty();
     $.ajax({
       url: 'http://jsonplaceholder.typicode.com/comments',
       type: 'GET'
     }).done(function(data){
       console.log(data);
+      var template = Handlebars.compile($('#ingredientIndexTemplate').html());
+      $('#container').html(template({
+        comments: data
+      }));
     }).fail(function(err){
       console.log(err);
     });
   },
 
   getOrders: function(){
+    $('#container').empty();
     $.ajax({
       url: 'http://jsonplaceholder.typicode.com/albums',
       type: 'GET'
     }).done(function(data){
-      console.log(data);
+      var template = Handlebars.compile($('#orderIndexTemplate').html());
+      $('#container').html(template({
+        albums: data
+      }));
     }).fail(function(err){
       console.log(err);
     });
@@ -89,9 +103,9 @@ var Router = Backbone.Router.extend({
   },
 });
 
-var router = new Router();
+var router = new AppRouter();
 Backbone.history.start();
 
 $(document).ready(function(){
-  router.newOrder();
+
 });
