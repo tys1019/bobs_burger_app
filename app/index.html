@@ -29,10 +29,9 @@
         <li><a href="#/posts">Burgers</a></li>
         <li><a href="#/comments">Ingredients</a></li>
         <li><a href="#/albums">Orders</a></li>
+        <li><a href="#/new-post">New Burger</a></li>
       </ul>
     </nav>
-
-    <h1>Welcome to Bob's Burgers!</h1>
 
     <section id="container">
     </section>
@@ -63,6 +62,13 @@
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/app.js"></script>
     <!-- endbuild -->
+
+    <script type="text/x-handlebars-template" id="homeTemplate">
+      <h1>Welcome to Bobs Burgers!</h1>
+      <p>Bacon ipsum dolor amet pig ham filet mignon pork frankfurter sausage beef. Porchetta ribeye shoulder ground round. Beef corned beef jowl hamburger chuck sausage landjaeger short loin tri-tip shoulder beef ribs. Pork loin shankle tongue, spare ribs short loin andouille chicken flank meatloaf kielbasa ground round corned beef bacon biltong. Pork belly meatball tail picanha shoulder. Pig biltong shank, ground round sausage ribeye chicken porchetta.
+
+Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swine leberkas rump. Meatloaf cow venison ham hock alcatra corned beef filet mignon, tri-tip short ribs. Salami jerky bacon chuck. Cupim hamburger frankfurter fatback andouille shoulder ham hock shankle short loin filet mignon ground round chuck tongue turkey.</p>
+    </script>
 
     <script type="text/x-handlebars-template" id="burgerIndexTemplate">
       {{#each posts}}

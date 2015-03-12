@@ -15,9 +15,13 @@ var AppRouter = Backbone.Router.extend({
   },
 
   home: function(){
+    $('#container').empty();
     $.ajax({
       url: 'http://localhost:9000'
-    }).done().fail(function(err){
+    }).done(function(){
+      var template = Handlebars.compile($('#homeTemplate').html());
+      $('#container').html(template());
+    }).fail(function(err){
       console.log(err);
     }).always();
   },
@@ -69,21 +73,27 @@ var AppRouter = Backbone.Router.extend({
     });
   },
 
-  // POST---------------------------------------------------
+  // POST---------------------------------------------------------------------------------
 
-  newBurger: function(){
-    $.ajax({
-      url: 'http://jsonplaceholder.typicode.com/posts',
-      type: 'POST',
-      data: {
-        title: 'Bacon Blue-Cheese Burger',
-        body: 'Cow meat with bacon and blue cheese on top',
-        userId: 1
-      }
-    }).done(function(data){
-      console.log(data);
-    }).fail(function(err){
-      console.log(err);
+  newBurger: function(event){
+    $('#container').empty().load('partials/burger-form.html', function(data, status, xhr){
+      var $form = $('#new-burger-form');
+      $form.on('submit', function(event){
+      $.ajax({
+        url: 'http://jsonplaceholder.typicode.com/posts',
+        type: 'POST',
+        data: {
+          burger: {
+            title: $('#title-input').val(),
+            body: $('#body-input').val()
+          }
+        }
+      }).done(function(data){
+        console.log(data);
+      }).fail(function(err){
+        console.log(err);
+      });
+      });
     });
   },
 
