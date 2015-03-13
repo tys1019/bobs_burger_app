@@ -40,7 +40,7 @@ var UserRouter = Backbone.Router.extend({
           url: 'http://localhost:3000/users/sign_in',
           type: 'POST',
           data: { user: {
-            name: $('#user-email').val(),
+            email: $('#user-email').val(),
             password: $('#user-password').val()
           }}
         }).done(App.loginSuccess).fail(function(err){
