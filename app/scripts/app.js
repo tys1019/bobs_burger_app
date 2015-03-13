@@ -63,6 +63,11 @@ var AppRouter = Backbone.Router.extend({
 
   getOrders: function(){
     $('#container').empty();
+    var authToken = localStorage.getItem('authToken');
+    $.ajaxPrefilter(function( options ) {
+      options.headers = {};
+      options.headers['AUTHORIZATION'] = "Token token=" + authToken;
+    });
     $.ajax({
       url: 'http://localhost:3000/orders',
       type: 'GET'
