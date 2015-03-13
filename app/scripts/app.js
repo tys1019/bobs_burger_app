@@ -7,10 +7,11 @@ var AppRouter = Backbone.Router.extend({
   routes: {
     '': 'home',
     'home': 'home',
-    'posts': 'getBurgers',
-    'new-post': 'newBurger', // burgers
-    'comments': 'getIngredients', // ingredients
-    'albums': 'getOrders', // orders
+    'burgers': 'getBurgers',
+    'burgers/:id': 'showBurgers',
+    'new-burger': 'newBurger',
+    'ingredients': 'getIngredients',
+    'orders': 'getOrders',
     'new-album': 'newOrder'
   },
 
@@ -26,16 +27,18 @@ var AppRouter = Backbone.Router.extend({
     }).always();
   },
 
+  // GET index--------------------------------------------------------------------
+
   getBurgers: function(){
     $('#container').empty();
     $.ajax({
-      url: 'http://jsonplaceholder.typicode.com/posts',
+      url: 'http://localhost:3000/burgers',
       type: 'GET'
     }).done(function(data){
       console.log(data);
       var template = Handlebars.compile($('#burgerIndexTemplate').html());
       $('#container').html(template({
-        posts: data
+        burgers: data
       }));
     }).fail(function(err){
       console.log(err);
@@ -45,13 +48,13 @@ var AppRouter = Backbone.Router.extend({
   getIngredients: function(){
     $('#container').empty();
     $.ajax({
-      url: 'http://jsonplaceholder.typicode.com/comments',
+      url: 'http://localhost:3000/ingredients',
       type: 'GET'
     }).done(function(data){
       console.log(data);
       var template = Handlebars.compile($('#ingredientIndexTemplate').html());
       $('#container').html(template({
-        comments: data
+        ingredients: data
       }));
     }).fail(function(err){
       console.log(err);
@@ -61,38 +64,70 @@ var AppRouter = Backbone.Router.extend({
   getOrders: function(){
     $('#container').empty();
     $.ajax({
-      url: 'http://jsonplaceholder.typicode.com/albums',
+      url: 'http://localhost:3000/orders',
       type: 'GET'
     }).done(function(data){
       var template = Handlebars.compile($('#orderIndexTemplate').html());
       $('#container').html(template({
-        albums: data
+        orders: data
       }));
     }).fail(function(err){
       console.log(err);
     });
   },
 
+  // GET show-----------------------------------------------------------------------------
+
+  showBurgers: function(id){
+    $('#container').empty();
+    $.ajax({
+      url: 'http://localhost:3000/burgers/' + id,
+      type: 'GET'
+    }).done().fail();
+  },
+
   // POST---------------------------------------------------------------------------------
 
   newBurger: function(event){
-    $('#container').empty().load('partials/burger-form.html', function(data, status, xhr){
-      var $form = $('#new-burger-form');
-      $form.on('submit', function(event){
+
+    $('#container').empty().load('partials/burger-form.html', function(){
+
       $.ajax({
-        url: 'http://jsonplaceholder.typicode.com/posts',
-        type: 'POST',
-        data: {
-          burger: {
-            title: $('#title-input').val(),
-            body: $('#body-input').val()
-          }
-        }
+        url: 'http://localhost:3000/ingredients',
+        type: 'GET'
       }).done(function(data){
         console.log(data);
+        var template = Handlebars.compile($('#ingredientsSelectTemp').html());
+        $('#ingredients-container').html(template({
+          ingredients: data
+        }));
       }).fail(function(err){
         console.log(err);
       });
+
+      var $form = $('#new-burger-form');
+      $form.on('submit', function(event){
+        var array = []
+        var $selected = $('input:checked').map(function(i){
+                              array[i] = $(this).val();
+                              return array;
+                            });
+        debugger;
+        if (event.preventDefault) event.preventDefault();
+        $.ajax({
+          url: 'http://localhost:3000/burgers',
+          type: 'POST',
+          data: {
+            burger: {
+              name: $('#burger-name-input').val(),
+              ingredients: array
+            }
+          }
+        }).done(function(data){
+          console.log(data);
+        }).fail(function(err){
+          console.log(err);
+        });
       });
     });
   },
