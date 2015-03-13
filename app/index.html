@@ -86,11 +86,14 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
     </script>
 
     <script type="text/x-handlebars-template" id="ingredientIndexTemplate">
-      {{#each ingredients}}
+      {{#each categories}}
         <div class="ingredients">
-          <h2>{{name}}</h2>
-          <h3>{{category}}</h3>
-          <h3>{{price}}</h3>
+          <h2>{{@key}}</h2>
+          <ul>
+          {{#each this}}
+            <li data-category="{{@../key}}" id="ingredient-{{this.id}}">{{this.name}}</li>
+          {{/each}}
+          </ul>
         </div>
       {{/each}}
     </script>

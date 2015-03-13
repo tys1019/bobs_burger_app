@@ -51,10 +51,12 @@ var AppRouter = Backbone.Router.extend({
       url: 'http://localhost:3000/ingredients',
       type: 'GET'
     }).done(function(data){
-      console.log(data);
+
+      var filteredIngredients = _.groupBy(data, 'category');
+
       var template = Handlebars.compile($('#ingredientIndexTemplate').html());
       $('#container').html(template({
-        ingredients: data
+        categories: filteredIngredients
       }));
     }).fail(function(err){
       console.log(err);
@@ -109,10 +111,12 @@ var AppRouter = Backbone.Router.extend({
         url: 'http://localhost:3000/ingredients',
         type: 'GET'
       }).done(function(data){
-        console.log(data);
+
+        var filteredIngredients = _.groupBy(data, 'category');
+
         var template = Handlebars.compile($('#ingredientsSelectTemp').html());
         $('#ingredients-container').html(template({
-          ingredients: data
+          categories: filteredIngredients
         }));
       }).fail(function(err){
         console.log(err);
