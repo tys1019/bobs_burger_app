@@ -1,11 +1,15 @@
 <form id="new-burger-form">
-  <div>
-    <label for="title">Title</label>
-    <input type="text" name="title" placeholder="Enter a title" id="title-input"/>
+  <div class="form-group">
+    <label for="burger-name">Burger Name</label>
+    <input type="text" class="form-control" placeholder="Enter a name" id="burger-name-input"/>
   </div>
-  <div>
-    <label for="body">Body</label>
-    <input type="text" name="body" placeholder="Enter text" id="body-input"/>
-  </div>
+  <section id="ingredients-container">
+  </section>
   <button type="submit">Submit</button>
 </form>
+
+<script type="text/x-handlebars-template" id="ingredientsSelectTemp">
+  {{#each ingredients}}
+    <input type="checkbox" name="chk_group[]" value="{{name}}" />{{name}}<br />
+  {{/each}}
+</script>

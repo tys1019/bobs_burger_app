@@ -26,10 +26,10 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="#/posts">Burgers</a></li>
-        <li><a href="#/comments">Ingredients</a></li>
-        <li><a href="#/albums">Orders</a></li>
-        <li><a href="#/new-post">New Burger</a></li>
+        <li><a href="#/burgers">Burgers</a></li>
+        <li><a href="#/ingredients">Ingredients</a></li>
+        <li><a href="#/orders">Orders</a></li>
+        <li><a href="#/new-burger">New Burger</a></li>
       </ul>
     </nav>
 
@@ -71,27 +71,31 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
     </script>
 
     <script type="text/x-handlebars-template" id="burgerIndexTemplate">
-      {{#each posts}}
+      {{#each burgers}}
         <div class="burgers">
-          <h2>{{title}}</h2>
-          <p>{{body}}</p>
+          <h2>{{name}}</h2>
+          {{#each ingredients}}
+            <p>{{name}}</p>
+          {{/each}}
         </div>
       {{/each}}
     </script>
 
     <script type="text/x-handlebars-template" id="ingredientIndexTemplate">
-      {{#each comments}}
+      {{#each ingredients}}
         <div class="ingredients">
           <h2>{{name}}</h2>
-          <p>{{body}}</p>
+          <h3>{{category}}</h3>
+          <h3>{{price}}</h3>
         </div>
       {{/each}}
     </script>
 
     <script type="text/x-handlebars-template" id="orderIndexTemplate">
-      {{#each albums}}
+      {{#each orders}}
         <div class="orders">
-          <h2>{{title}}</h2>
+          <h2>{{burgers}}</h2>
+          <h3>{{total_price}}</h3>
         </div>
       {{/each}}
     </script>
