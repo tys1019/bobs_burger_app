@@ -83,7 +83,14 @@ var AppRouter = Backbone.Router.extend({
     $.ajax({
       url: 'http://localhost:3000/burgers/' + id,
       type: 'GET'
-    }).done().fail();
+    }).done(function(data){
+      var template = Handlebars.compile($('#burgerShowTemp').html());
+      $('#container').html(template({
+        burger: data
+      }));
+    }).fail(function(err){
+      console.log(err);
+    });
   },
 
   // POST---------------------------------------------------------------------------------
@@ -112,7 +119,6 @@ var AppRouter = Backbone.Router.extend({
                               array[i] = $(this).val();
                               return array;
                             });
-        debugger;
         if (event.preventDefault) event.preventDefault();
         $.ajax({
           url: 'http://localhost:3000/burgers',
