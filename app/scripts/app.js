@@ -51,10 +51,12 @@ var AppRouter = Backbone.Router.extend({
       url: 'http://localhost:3000/ingredients',
       type: 'GET'
     }).done(function(data){
-      console.log(data);
+
+      var filteredIngredients = _.groupBy(data, 'category');
+
       var template = Handlebars.compile($('#ingredientIndexTemplate').html());
       $('#container').html(template({
-        ingredients: data
+        categories: filteredIngredients
       }));
     }).fail(function(err){
       console.log(err);
@@ -103,10 +105,12 @@ var AppRouter = Backbone.Router.extend({
         url: 'http://localhost:3000/ingredients',
         type: 'GET'
       }).done(function(data){
-        console.log(data);
+
+        var filteredIngredients = _.groupBy(data, 'category');
+
         var template = Handlebars.compile($('#ingredientsSelectTemp').html());
         $('#ingredients-container').html(template({
-          ingredients: data
+          categories: filteredIngredients
         }));
       }).fail(function(err){
         console.log(err);
@@ -160,3 +164,16 @@ Backbone.history.start();
 $(document).ready(function(){
 
 });
+
+// function filterByCategory(category, element) {
+//   return element.category === category;
+// }
+
+// var categories = ["bun", "patty", "vegetables", "cheese", "sauce", "premium"]
+
+// categories.forEach(data.filter(filterByCategory.bind(this, category)));
+
+
+// data.filter(filterByCategory.bind(this, "category"));
+
+

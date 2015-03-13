@@ -9,7 +9,14 @@
 </form>
 
 <script type="text/x-handlebars-template" id="ingredientsSelectTemp">
-  {{#each ingredients}}
-    <input type="checkbox" name="chk_group[]" value="{{name}}" />{{name}}<br />
+  {{#each categories}}
+    <div class="ingredients">
+      <h2>{{@key}}</h2>
+      <ul>
+      {{#each this}}
+        <input type="checkbox" data-category="{{@../key}}" id="ingredient-{{this.id}}"value="{{this.name}}" />{{this.name}}<br />
+      {{/each}}
+      </ul>
+    </div>
   {{/each}}
 </script>
