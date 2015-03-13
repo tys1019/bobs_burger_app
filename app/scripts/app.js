@@ -78,6 +78,7 @@ var AppRouter = Backbone.Router.extend({
       }));
     }).fail(function(err){
       console.log(err);
+      window.location.replace("http://localhost:9000/#/users/sign_in")
     });
   },
 
