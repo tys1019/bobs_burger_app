@@ -15,10 +15,11 @@ var UserRouter = Backbone.Router.extend({
       $form.on('submit', function(event){
         event.preventDefault();
         $.ajax({
-          url: 'localhost:3000/users',
+          url: 'http://localhost:3000/users',
           type: 'POST',
           data: { user: {
             name: $('#user-name').val(),
+            email: $('#user-email').val(),
             password: $('#user-password').val(),
             address: $('#user-address').val()
           }}
@@ -36,10 +37,10 @@ var UserRouter = Backbone.Router.extend({
       $form.on('submit', function(event){
         event.preventDefault();
         $.ajax({
-          url: 'localhost:3000/users/sign_in',
+          url: 'http://localhost:3000/users/sign_in',
           type: 'POST',
           data: { user: {
-            name: $('#user-name').val(),
+            name: $('#user-email').val(),
             password: $('#user-password').val()
           }}
         }).done(App.loginSuccess).fail(function(err){
@@ -57,10 +58,13 @@ var userRouter = new UserRouter();
 
 var App = App || {};
 
+var authToken = localStorage.getItem('authToken');
+
 App.loginSuccess = function(userData){
   localStorage.setItem('authToken', userData.token);
+  console.log(userData);
   console.log('logged in!');
-  window.location.href = '/';
+  // window.location.href = '/';
 };
 
 App.setupAjaxRequests = function() {
@@ -69,3 +73,15 @@ App.setupAjaxRequests = function() {
     options.headers['AUTHORIZATION'] = "Token token=" + authToken;
   });
 };
+
+App.signOut = function(event){
+  event.preventDefault();
+  localStorage.removeItem('authToken');
+  authToken = undefined;
+};
+
+$(document).ready(function(){
+  $('#sign-out').on('click', function(event){
+    App.signOut(event);
+  });
+});
