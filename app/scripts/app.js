@@ -164,16 +164,3 @@ Backbone.history.start();
 $(document).ready(function(){
 
 });
-
-// function filterByCategory(category, element) {
-//   return element.category === category;
-// }
-
-// var categories = ["bun", "patty", "vegetables", "cheese", "sauce", "premium"]
-
-// categories.forEach(data.filter(filterByCategory.bind(this, category)));
-
-
-// data.filter(filterByCategory.bind(this, "category"));
-
-
