@@ -12,7 +12,7 @@ var AppRouter = Backbone.Router.extend({
     'new-burger': 'newBurger',
     'ingredients': 'getIngredients',
     'orders': 'getOrders',
-    'new-album': 'newOrder'
+    'cart': 'showCart'
   },
 
   home: function(){
@@ -92,6 +92,8 @@ var AppRouter = Backbone.Router.extend({
       url: 'http://localhost:3000/burgers/' + id,
       type: 'GET'
     }).done(function(data){
+      debugger
+
       var template = Handlebars.compile($('#burgerShowTemp').html());
       $('#container').html(template({
         burger: data
@@ -123,6 +125,7 @@ var AppRouter = Backbone.Router.extend({
       });
 
       var $form = $('#new-burger-form');
+
       $form.on('submit', function(event){
         var array = []
         var $selected = $('input:checked').map(function(i){
@@ -130,39 +133,54 @@ var AppRouter = Backbone.Router.extend({
                               return array;
                             });
 
-        if (event.preventDefault) event.preventDefault();
-        $.ajax({
-          url: 'http://localhost:3000/burgers',
-          type: 'POST',
-          data: {
-            burger: {
+        if (localStorage.cart === undefined) localStorage.cart = '';
+        if (localStorage.counter === undefined) localStorage.counter = 1;
+        var counter = localStorage.counter;
+
+
+        var burgerString = counter + JSON.stringify({burger: {
               name: $('#burger-name-input').val(),
               ingredients: array,
-            }
-          }
-        }).done(function(data){
-          console.log(data);
-        }).fail(function(err){
-          console.log(err);
-        });
+            }}) + counter +' ';
+        localStorage.cart += burgerString;
+        localStorage.counter ++;
+
+        $('input:checked').prop('checked', false);
+        $('#burger-name-input').val('');
+
+        // Generates regex to grab a specific burger
+        // var re = new RegExp("(?:" + number + ")(.*?)(?=" + (parseInt(number) + 1) + ")", "g");
+
+        // Grabs the last digit for iterating purposes
+        // localStorage.cart.match(/(\d+)[^\d]*$/g)
+
+
+
       });
     });
   },
 
-  newOrder: function(){
-    $.ajax({
-      url: 'http://jsonplaceholder.typicode.com/albums',
-      type: 'POST',
-      data: {
-        title: 'Order 122',
-        userId: 12
-      }
-    }).done(function(data){
-      console.log(data);
-    }).fail(function(err){
-      console.log(err);
-    });
+  showCart: function(){
+    $('#container').empty().load('partials/cart.html', function(){
+      var burgerCount = localStorage.cart.match(/(\d+)[^\d]*$/)[1];
+      var re, burger, template;
+
+      for (var i = 1; i <= burgerCount; i++) {
+        re = new RegExp("(?:" + i + ")(.*?)(?=" + i + ")", "g");
+        burger = JSON.parse(String(localStorage.cart.match(re)).replace(/\d/, ''));
+
+        // debugger
+
+
+        var template = Handlebars.compile($('#cartTemplate').html());
+        $('#container').append(template(burger.burger));
+
+      };
+    })
   },
+
+
+
 });
 
 var router = new AppRouter();
