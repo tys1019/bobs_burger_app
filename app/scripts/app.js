@@ -129,6 +129,7 @@ var AppRouter = Backbone.Router.extend({
                               array[i] = $(this).val();
                               return array;
                             });
+
         if (event.preventDefault) event.preventDefault();
         $.ajax({
           url: 'http://localhost:3000/burgers',
@@ -136,7 +137,7 @@ var AppRouter = Backbone.Router.extend({
           data: {
             burger: {
               name: $('#burger-name-input').val(),
-              ingredients: array
+              ingredients: array,
             }
           }
         }).done(function(data){
