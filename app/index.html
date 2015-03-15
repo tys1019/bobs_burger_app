@@ -78,6 +78,7 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
       {{#each burgers}}
         <div class="burgers">
           <h2>{{name}} <button class="btn btn-default"><a href="#/burgers/{{id}}">View</a></button></h2>
+          <p>Price: {{price}}</p>
           {{#each ingredients}}
             <p>{{name}}</p>
           {{/each}}
@@ -110,6 +111,7 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
     <script type="text/x-handlebars-template" id="burgerShowTemp">
       <div>
         <h2>{{burger.name}}</h2>
+        <p>{{burger.price}}</p>
         <h3>Ingredients:</h3>
         {{#each burger.ingredients}}
           <h4>{{category}}: {{name}}</h4>
