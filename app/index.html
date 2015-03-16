@@ -123,10 +123,13 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
 
     <script type="text/x-handlebars-template" id="shoppingCart">
       {{#each array}}
-        {{@key}}
+        <div id="burger-{{@key}}">
           {{#each this}}
-            {{burger}}: {{name}}, {{quantity}}
+            <p>{{name}}: {{quantity}}, {{price}}</p>
+            <button type="button" class="btn btn-default edit" id="edit-{{@../key}}">Edit</button>
+            <button type="button" class="btn btn-danger delete" id="delete-{{@../key}}">Delete</button>
           {{/each}}
+        </div>
       {{/each}}
     </script>
 
