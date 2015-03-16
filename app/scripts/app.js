@@ -97,6 +97,13 @@ var AppRouter = Backbone.Router.extend({
       $('#container').html(template({
         burger: data
       }));
+
+      console.log(data);
+
+      $('#addToCart').on('click', function(){
+        App.addToCart(data);
+      });
+
     }).fail(function(err){
       console.log(err);
     });
@@ -232,6 +239,20 @@ var AppRouter = Backbone.Router.extend({
   },
 });
 
+var App = App || {};
+
+App.addToCart = function(data){
+  var cart;
+  localStorage.cart ? cart = JSON.parse(localStorage.cart) : cart = [];
+
+  var obj = {};
+  obj.burger = data;
+
+  cart.push(obj);
+  localStorage.cart = JSON.stringify(cart);
+
+  console.log(cart);
+},
 
 $(document).ready(function(){
   var router = new AppRouter();
