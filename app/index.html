@@ -33,6 +33,7 @@
         <li><a href="#/users">Sign Up</a></li>
         <li><a href="#/users/sign_in">Sign In</a></li>
         <li><button type="button" id="sign-out">Sign Out</button></li>
+        <li><a href="#/cart">Cart</a></li>
       </ul>
     </nav>
 
@@ -56,9 +57,9 @@
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
-    <script src="bower_components/handlebars/handlebars.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
+    <script src="bower_components/handlebars/handlebars.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -116,7 +117,18 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
         {{#each burger.ingredients}}
           <h4>{{category}}: {{name}}</h4>
         {{/each}}
+        <button type="button" class="btn btn-default" id="addToCart">Add To Cart</button>
       </div>
     </script>
-</body>
+
+    <script type="text/x-handlebars-template" id="shoppingCart">
+      {{#each array}}
+        {{@key}}
+          {{#each this}}
+            {{burger}}: {{name}}, {{quantity}}
+          {{/each}}
+      {{/each}}
+    </script>
+
+  </body>
 </html>

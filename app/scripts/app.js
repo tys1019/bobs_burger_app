@@ -2,7 +2,6 @@
 /*global Handlebars:true */
 /*global Backbone:true */
 'use strict';
-
 var AppRouter = Backbone.Router.extend({
   routes: {
     '': 'home',
@@ -92,7 +91,6 @@ var AppRouter = Backbone.Router.extend({
       url: 'http://localhost:3000/burgers/' + id,
       type: 'GET'
     }).done(function(data){
-      debugger
 
       var template = Handlebars.compile($('#burgerShowTemp').html());
       $('#container').html(template({
@@ -128,7 +126,7 @@ var AppRouter = Backbone.Router.extend({
 
       $form.on('submit', function(event){
 
-        var array = []
+        var array = [];
         var $selected = $('input:checked').map(function(i){
                               array[i] = $(this).val();
                               return array;
@@ -136,8 +134,6 @@ var AppRouter = Backbone.Router.extend({
 
         var cart;
         localStorage.cart ? cart = JSON.parse(localStorage.cart) : cart = [];
-
-        debugger
 
 
         var burgerString = {burger: {
@@ -157,19 +153,21 @@ var AppRouter = Backbone.Router.extend({
     });
   },
 
+  // -------------------------------------------------------------------------------------
+
   showCart: function(){
-    $('#container').empty().load('partials/cart.html', function(){
-
-    })
+    $('#container').empty();
+    var cart = JSON.parse(localStorage.cart);
+    console.log(cart);
+    var template = Handlebars.compile($('#shoppingCart').html());
+    $('#container').html(template({
+      array: cart
+    }));
   },
-
-
-
 });
 
-var router = new AppRouter();
-Backbone.history.start();
 
 $(document).ready(function(){
-
+  var router = new AppRouter();
+  Backbone.history.start();
 });
