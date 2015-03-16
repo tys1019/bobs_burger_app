@@ -12,7 +12,8 @@ var AppRouter = Backbone.Router.extend({
     'new-burger': 'newBurger',
     'ingredients': 'getIngredients',
     'orders': 'getOrders',
-    'cart': 'showCart'
+    'cart': 'showCart',
+    'edit-burger/:id': 'editBurger'
   },
 
   home: function(){
@@ -155,6 +156,71 @@ var AppRouter = Backbone.Router.extend({
 
       });
     });
+  },
+
+  editBurger: function(id){
+     $('#container').empty().load('partials/burger-form.html', function(){
+        var cart = JSON.parse(localStorage.cart);
+        var burger = cart[id];
+
+        $.ajax({
+          url: 'http://localhost:3000/ingredients',
+          type: 'GET'
+        }).done(function(data){
+
+          var filteredIngredients = _.groupBy(data, 'category');
+
+          var template = Handlebars.compile($('#ingredientsSelectTemp').html());
+          $('#ingredients-container').html(template({
+            categories: filteredIngredients
+          }));
+          burger.burger.ingredients.forEach(function(ing){
+            $('[value="'+ ing +'"]').prop('checked', true);
+          });
+
+          $('#burger-name-input').val(burger.burger.name);
+          $('#quantity').val(burger.burger.quantity);
+
+
+          $('[type=submit]').text('Save');
+
+        }).fail(function(err){
+          console.log(err);
+        });
+
+
+
+        // debugger
+      var $form = $('#new-burger-form');
+
+      $form.on('submit', function(event){
+
+        var array = []
+        var $selected = $('input:checked').map(function(i){
+                              array[i] = $(this).val();
+                              return array;
+                            });
+
+
+        var burgerString = {burger: {
+              name: $('#burger-name-input').val(),
+              ingredients: array,
+              quantity: $('#quantity').val()
+            }};
+
+        cart[id] = burgerString;
+        localStorage.cart = JSON.stringify(cart);
+
+
+        $('input:checked').prop('checked', false);
+        $('#burger-name-input').val('');
+
+        router.navigate('cart',{trigger: true});
+
+
+      });
+     });
+
   },
 
   showCart: function(){
