@@ -27,3 +27,13 @@
   <button type="submit">Submit Payment</button>
 </form>
 
+
+    <script type="text/x-handlebars-template" id="checkout">
+      {{#each array}}
+        <div id="burger-{{@key}}">
+          {{#each this}}
+            <p>{{name}}: {{quantity}}</p>
+          {{/each}}
+        </div>
+      {{/each}}
+    </script>

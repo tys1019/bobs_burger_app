@@ -258,26 +258,70 @@ var AppRouter = Backbone.Router.extend({
   },
 
   checkout: function(){
+    var stripeResponseHandler = function(status, response) {
+      var $form = $('#payment-form');
+
+      if (response.error) {
+        // Show the errors on the form
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        // response contains id and card, which contains additional card details
+        var token = response.id;
+        // Insert the token into the form so it gets submitted to the server
+        sendOrderToServer(token);
+        // and submit
+        $('#container').fadeOut(function(){
+          $(this).html($('<div id=success>ORDER SUBMITTED!</div>')).fadeIn();
+
+        });
+      }
+    };
+
+    var sendOrderToServer = function(token) {
+      $.ajax({
+        url: 'http://localhost:3000/orders',
+        type: 'POST',
+        data: { order: {
+            burgers: JSON.parse(localStorage.cart),
+            stripe_token: token,
+            total_price: 10
+          }
+        },
+      })
+      .done(function() {
+        console.log("success");
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+
+    };
+
 
     $('#container').empty().load('partials/checkout-form.html', function(){
          var cart = JSON.parse(localStorage.cart);
-    // debugger
+
 
         var template = Handlebars.compile($('#checkout').html());
-        $('#container').html(template({
+        $('#container').append(template({
           array: cart
         }));
-      // $('#payment-form').submit(function(event) {
-      //   var $form = $(this);
 
-      //   // Disable the submit button to prevent repeated clicks
-      //   $form.find('button').prop('disabled', true);
+        $('#payment-form').submit(function(event) {
+          var $form = $(this);
 
-      //   Stripe.card.createToken($form, stripeResponseHandler);
+          // Disable the submit button to prevent repeated clicks
+          $form.find('button').prop('disabled', true);
 
-      //   // Prevent the form from submitting with the default action
-      //   return false;
-      // });
+          Stripe.card.createToken($form, stripeResponseHandler);
+
+          // Prevent the form from submitting with the default action
+          return false;
+        });
     });
 
 

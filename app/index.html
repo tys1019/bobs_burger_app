@@ -130,7 +130,7 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
       {{#each array}}
         <div id="burger-{{@key}}">
           {{#each this}}
-            <p>{{name}}: {{quantity}}</p>
+            <p>{{name}}: {{quantity}}, {{price}}</p>
             <button type="button" class="btn btn-default edit" id="edit-{{@../key}}">Edit</button>
             <button type="button" class="btn btn-danger delete" id="delete-{{@../key}}">Delete</button>
           {{/each}}
@@ -139,17 +139,6 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
     </script>
 
 
-    <script type="text/x-handlebars-template" id="checkout">
-      {{#each array}}
-        <div id="burger-{{@key}}">
-          {{#each this}}
-            <p>{{name}}: {{quantity}}</p>
-            <button type="button" class="btn btn-default edit" id="edit-{{@../key}}">Edit</button>
-            <button type="button" class="btn btn-danger delete" id="delete-{{@../key}}">Delete</button>
-          {{/each}}
-        </div>
-      {{/each}}
-    </script>
 
 
   </body>
