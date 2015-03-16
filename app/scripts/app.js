@@ -2,6 +2,7 @@
 /*global Handlebars:true */
 /*global Backbone:true */
 'use strict';
+
 var AppRouter = Backbone.Router.extend({
   routes: {
     '': 'home',
@@ -97,8 +98,6 @@ var AppRouter = Backbone.Router.extend({
       $('#container').html(template({
         burger: data
       }));
-
-      console.log(data);
 
       $('#addToCart').on('click', function(){
         App.addToCart(data);
