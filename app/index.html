@@ -68,6 +68,11 @@
     <script src="scripts/user.js"></script>
     <!-- endbuild -->
 
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript">
+      Stripe.setPublishableKey('pk_test_IY5irc1eNOxYQ6xMlavhENaa');
+    </script>
+
     <script type="text/x-handlebars-template" id="homeTemplate">
       <h1>Welcome to Bobs Burgers!</h1>
       <p>Bacon ipsum dolor amet pig ham filet mignon pork frankfurter sausage beef. Porchetta ribeye shoulder ground round. Beef corned beef jowl hamburger chuck sausage landjaeger short loin tri-tip shoulder beef ribs. Pork loin shankle tongue, spare ribs short loin andouille chicken flank meatloaf kielbasa ground round corned beef bacon biltong. Pork belly meatball tail picanha shoulder. Pig biltong shank, ground round sausage ribeye chicken porchetta.
@@ -127,13 +132,25 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
           {{#each this}}
             <p>{{name}}: {{quantity}}</p>
             <button type="button" class="btn btn-default edit" id="edit-{{@../key}}">Edit</button>
-
             <button type="button" class="btn btn-danger delete" id="delete-{{@../key}}">Delete</button>
-
           {{/each}}
         </div>
       {{/each}}
     </script>
+
+
+    <script type="text/x-handlebars-template" id="checkout">
+      {{#each array}}
+        <div id="burger-{{@key}}">
+          {{#each this}}
+            <p>{{name}}: {{quantity}}</p>
+            <button type="button" class="btn btn-default edit" id="edit-{{@../key}}">Edit</button>
+            <button type="button" class="btn btn-danger delete" id="delete-{{@../key}}">Delete</button>
+          {{/each}}
+        </div>
+      {{/each}}
+    </script>
+
 
   </body>
 </html>

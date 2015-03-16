@@ -12,7 +12,8 @@ var AppRouter = Backbone.Router.extend({
     'ingredients': 'getIngredients',
     'orders': 'getOrders',
     'cart': 'showCart',
-    'edit-burger/:id': 'editBurger'
+    'edit-burger/:id': 'editBurger',
+    'checkout': 'checkout'
   },
 
   home: function(){
@@ -80,7 +81,8 @@ var AppRouter = Backbone.Router.extend({
       }));
     }).fail(function(err){
       console.log(err);
-      window.location.replace("http://localhost:9000/#/users/sign_in")
+        window.location.hash = "#/users/sign_in";
+
     });
   },
 
@@ -149,7 +151,8 @@ var AppRouter = Backbone.Router.extend({
 
         $('input:checked').prop('checked', false);
         $('#burger-name-input').val('');
-        window.location.replace("http://localhost:9000/#/cart");
+        window.location.hash = "#/cart";
+
 
 
       });
@@ -215,8 +218,7 @@ var AppRouter = Backbone.Router.extend({
         $('input:checked').prop('checked', false);
         $('#burger-name-input').val('');
 
-        window.location.replace("http://localhost:9000/#/cart")
-
+        window.location.hash = "#/cart";
 
       });
      });
@@ -234,7 +236,7 @@ var AppRouter = Backbone.Router.extend({
 
     $('.edit').on('click', function(event){
       var id = parseInt(this.id.match(/\d/g));
-      window.location.replace("http://localhost:9000/#/edit-burger/" + id)
+      window.location.hash = "#/edit-burger/" + id;
     });
 
     $('.delete').on('click', function(event){
@@ -242,8 +244,38 @@ var AppRouter = Backbone.Router.extend({
       var cart = JSON.parse(localStorage.cart);
       cart.splice(id, 1);
       localStorage.cart = JSON.stringify(cart);
-      $('#burger-' + id).remove();
+      $('#burger-' + id).fadeOut(function(){
+        this.remove();
+      });
     });
+  },
+
+  checkout: function(){
+
+    $('#container').empty().load('partials/checkout-form.html', function(){
+         var cart = JSON.parse(localStorage.cart);
+    // debugger
+
+        var template = Handlebars.compile($('#checkout').html());
+        $('#container').html(template({
+          array: cart
+        }));
+      // $('#payment-form').submit(function(event) {
+      //   var $form = $(this);
+
+      //   // Disable the submit button to prevent repeated clicks
+      //   $form.find('button').prop('disabled', true);
+
+      //   Stripe.card.createToken($form, stripeResponseHandler);
+
+      //   // Prevent the form from submitting with the default action
+      //   return false;
+      // });
+    });
+
+
+
+
   },
 });
 
