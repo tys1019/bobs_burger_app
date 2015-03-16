@@ -127,34 +127,31 @@ var AppRouter = Backbone.Router.extend({
       var $form = $('#new-burger-form');
 
       $form.on('submit', function(event){
+
         var array = []
         var $selected = $('input:checked').map(function(i){
                               array[i] = $(this).val();
                               return array;
                             });
 
-        if (localStorage.cart === undefined) localStorage.cart = '';
-        if (localStorage.counter === undefined) localStorage.counter = 1;
-        var counter = localStorage.counter;
+        var cart;
+        localStorage.cart ? cart = JSON.parse(localStorage.cart) : cart = [];
+
+        debugger
 
 
-        var burgerString = counter + JSON.stringify({burger: {
+        var burgerString = {burger: {
               name: $('#burger-name-input').val(),
               ingredients: array,
-            }}) + counter +' ';
-        localStorage.cart += burgerString;
-        localStorage.counter ++;
+              quantity: $('#quantity').val()
+            }};
+
+        cart.push(burgerString);
+        localStorage.cart = JSON.stringify(cart);
+
 
         $('input:checked').prop('checked', false);
         $('#burger-name-input').val('');
-
-        // Generates regex to grab a specific burger
-        // var re = new RegExp("(?:" + number + ")(.*?)(?=" + (parseInt(number) + 1) + ")", "g");
-
-        // Grabs the last digit for iterating purposes
-        // localStorage.cart.match(/(\d+)[^\d]*$/g)
-
-
 
       });
     });
@@ -162,20 +159,7 @@ var AppRouter = Backbone.Router.extend({
 
   showCart: function(){
     $('#container').empty().load('partials/cart.html', function(){
-      var burgerCount = localStorage.cart.match(/(\d+)[^\d]*$/)[1];
-      var re, burger, template;
 
-      for (var i = 1; i <= burgerCount; i++) {
-        re = new RegExp("(?:" + i + ")(.*?)(?=" + i + ")", "g");
-        burger = JSON.parse(String(localStorage.cart.match(re)).replace(/\d/, ''));
-
-        // debugger
-
-
-        var template = Handlebars.compile($('#cartTemplate').html());
-        $('#container').append(template(burger.burger));
-
-      };
     })
   },
 
