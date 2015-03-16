@@ -140,13 +140,13 @@ var AppRouter = Backbone.Router.extend({
                               return array;
                             });
 
-        var default_price = 6.5;
-        var premium_array = [];
-        var add_premium = $('div#premium input:checked').map(function(i){
-          premium_array[i] = $(this).val();
-        })
+        var defaultPrice = 6.5;
+        var premiumArray = [];
+        var addPremium = $('div#premium input:checked').map(function(i){
+          premiumArray[i] = $(this).val();
+        });
 
-        var final_price = premium_array.length + default_price;
+        var finalPrice = premiumArray.length + defaultPrice;
 
         var cart;
         localStorage.cart ? cart = JSON.parse(localStorage.cart) : cart = [];
@@ -156,7 +156,7 @@ var AppRouter = Backbone.Router.extend({
               name: $('#burger-name-input').val(),
               ingredients: array,
               quantity: $('#quantity').val() || 1,
-              price: final_price || 6.5
+              price: finalPrice || 6.5
             }};
 
         cart.push(burgerString);
