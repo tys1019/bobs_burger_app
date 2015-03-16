@@ -273,7 +273,6 @@ var AppRouter = Backbone.Router.extend({
         // and submit
         $('#container').fadeOut(function(){
           $(this).html($('<div id=success>ORDER SUBMITTED!</div>')).fadeIn();
-
         });
       }
     };
@@ -291,6 +290,7 @@ var AppRouter = Backbone.Router.extend({
       })
       .done(function() {
         console.log("success");
+        localStorage.removeItem('cart');
       })
       .fail(function() {
         console.log("error");
