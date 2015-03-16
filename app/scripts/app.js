@@ -149,6 +149,8 @@ var AppRouter = Backbone.Router.extend({
 
         $('input:checked').prop('checked', false);
         $('#burger-name-input').val('');
+        window.location.replace("http://localhost:9000/#/cart");
+
 
       });
     });
@@ -213,7 +215,7 @@ var AppRouter = Backbone.Router.extend({
         $('input:checked').prop('checked', false);
         $('#burger-name-input').val('');
 
-        router.navigate('cart',{trigger: true});
+        window.location.replace("http://localhost:9000/#/cart")
 
 
       });
@@ -229,6 +231,19 @@ var AppRouter = Backbone.Router.extend({
     $('#container').html(template({
       array: cart
     }));
+
+    $('.edit').on('click', function(event){
+      var id = parseInt(this.id.match(/\d/g));
+      window.location.replace("http://localhost:9000/#/edit-burger/" + id)
+    });
+
+    $('.delete').on('click', function(event){
+      var id = parseInt(this.id.match(/\d/g));
+      var cart = JSON.parse(localStorage.cart);
+      cart.splice(id, 1);
+      localStorage.cart = JSON.stringify(cart);
+      $('#burger-' + id).remove();
+    });
   },
 });
 
