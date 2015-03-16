@@ -2,6 +2,7 @@
 /*global Handlebars:true */
 /*global Backbone:true */
 'use strict';
+
 var AppRouter = Backbone.Router.extend({
   routes: {
     '': 'home',
@@ -100,8 +101,6 @@ var AppRouter = Backbone.Router.extend({
         burger: data
       }));
 
-      console.log(data);
-
       $('#addToCart').on('click', function(){
         App.addToCart(data);
       });
@@ -126,7 +125,8 @@ var AppRouter = Backbone.Router.extend({
 
         var template = Handlebars.compile($('#ingredientsSelectTemp').html());
         $('#ingredients-container').html(template({
-          categories: filteredIngredients
+          categories: filteredIngredients,
+
         }));
       }).fail(function(err){
         console.log(err);
@@ -142,6 +142,14 @@ var AppRouter = Backbone.Router.extend({
                               return array;
                             });
 
+        var defaultPrice = 6.5;
+        var premiumArray = [];
+        var addPremium = $('div#premium input:checked').map(function(i){
+          premiumArray[i] = $(this).val();
+        });
+
+        var finalPrice = premiumArray.length + defaultPrice;
+
         var cart;
         localStorage.cart ? cart = JSON.parse(localStorage.cart) : cart = [];
 
@@ -149,7 +157,8 @@ var AppRouter = Backbone.Router.extend({
         var burgerString = {burger: {
               name: $('#burger-name-input').val(),
               ingredients: array,
-              quantity: $('#quantity').val()
+              quantity: $('#quantity').val() || 1,
+              price: finalPrice || 6.5
             }};
 
         cart.push(burgerString);

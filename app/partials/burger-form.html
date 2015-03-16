@@ -14,7 +14,7 @@
 
 <script type="text/x-handlebars-template" id="ingredientsSelectTemp">
   {{#each categories}}
-    <div class="ingredients">
+    <div class="ingredients" id={{@key}}>
       <h2>{{@key}}</h2>
       <ul>
       {{#each this}}
