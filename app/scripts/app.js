@@ -12,7 +12,7 @@ var AppRouter = Backbone.Router.extend({
     'new-burger': 'newBurger',
     'ingredients': 'getIngredients',
     'orders': 'getOrders',
-    'new-album': 'newOrder'
+    'cart': 'showCart'
   },
 
   home: function(){
@@ -92,6 +92,8 @@ var AppRouter = Backbone.Router.extend({
       url: 'http://localhost:3000/burgers/' + id,
       type: 'GET'
     }).done(function(data){
+      debugger
+
       var template = Handlebars.compile($('#burgerShowTemp').html());
       $('#container').html(template({
         burger: data
@@ -123,46 +125,46 @@ var AppRouter = Backbone.Router.extend({
       });
 
       var $form = $('#new-burger-form');
+
       $form.on('submit', function(event){
+
         var array = []
         var $selected = $('input:checked').map(function(i){
                               array[i] = $(this).val();
                               return array;
                             });
 
-        if (event.preventDefault) event.preventDefault();
-        $.ajax({
-          url: 'http://localhost:3000/burgers',
-          type: 'POST',
-          data: {
-            burger: {
+        var cart;
+        localStorage.cart ? cart = JSON.parse(localStorage.cart) : cart = [];
+
+        debugger
+
+
+        var burgerString = {burger: {
               name: $('#burger-name-input').val(),
               ingredients: array,
-            }
-          }
-        }).done(function(data){
-          console.log(data);
-        }).fail(function(err){
-          console.log(err);
-        });
+              quantity: $('#quantity').val()
+            }};
+
+        cart.push(burgerString);
+        localStorage.cart = JSON.stringify(cart);
+
+
+        $('input:checked').prop('checked', false);
+        $('#burger-name-input').val('');
+
       });
     });
   },
 
-  newOrder: function(){
-    $.ajax({
-      url: 'http://jsonplaceholder.typicode.com/albums',
-      type: 'POST',
-      data: {
-        title: 'Order 122',
-        userId: 12
-      }
-    }).done(function(data){
-      console.log(data);
-    }).fail(function(err){
-      console.log(err);
-    });
+  showCart: function(){
+    $('#container').empty().load('partials/cart.html', function(){
+
+    })
   },
+
+
+
 });
 
 var router = new AppRouter();
