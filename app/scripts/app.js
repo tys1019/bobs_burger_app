@@ -321,11 +321,11 @@ var AppRouter = Backbone.Router.extend({
         data: { order: {
             items: localStorage.cart,
             stripe_token: token,
-            total_price: totalPrice
+            total_price: totalPrice,
+            total_price: $('#total-price').text()
           }
         },
         headers: {"AUTHORIZATION": "Token token=" + localStorage.authToken }
-        // 'Token token=undefined'
       })
       .done(function() {
         console.log("success");
@@ -347,8 +347,11 @@ var AppRouter = Backbone.Router.extend({
 
         var template = Handlebars.compile($('#checkout').html());
         $('#container').append(template({
-          array: cart
+          array: cart,
+          totalPrice: totalPrice
         }));
+
+        App.deliveryCheck(totalPrice);
 
         $('#payment-form').submit(function(event) {
           var $form = $(this);
@@ -389,7 +392,31 @@ App.addToCart = function(data){
   localStorage.cart = JSON.stringify(cart);
 
   console.log(cart);
-},
+};
+
+App.deliveryCheck = function(totalPrice){
+  $('input[type="radio"]').click(function(){
+    if($(this).attr("value")=="Delivery"){
+      $('#zip-box').removeAttr('hidden');
+    }
+    else {
+      $('#zip-box').prop('hidden', 'hidden');
+    }
+  });
+
+  $('#zip-box').keyup(function(){
+    var zip = $(this).val();
+    if (zip.match(/\b(021[0-1][013489])|(02210)\b/g)) {
+      $('#total-price').text(totalPrice + 6);
+    } else if (zip.match(/\b(02[14][3-4][1234569])\b/g)) {
+      $('#total-price').text(totalPrice + 10);
+    } else {
+      $('#total-price').text(totalPrice);
+    }
+
+  });
+
+};
 
 $(document).ready(function(){
   var router = new AppRouter();
