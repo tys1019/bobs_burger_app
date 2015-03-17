@@ -219,12 +219,26 @@ var AppRouter = Backbone.Router.extend({
                               array[i] = $(this).val();
                               return array;
                             });
+        var array = [];
+        var $selected = $('input:checked').map(function(i){
+                              array[i] = $(this).val();
+                              return array;
+                            });
+
+        var defaultPrice = 6.5;
+        var premiumArray = [];
+        var addPremium = $('div#premium input:checked').map(function(i){
+          premiumArray[i] = $(this).val();
+        });
+
+        var finalPrice = premiumArray.length + defaultPrice;
 
 
         var burgerString = {burger: {
               name: $('#burger-name-input').val(),
               ingredients: array,
-              quantity: $('#quantity').val()
+              quantity: $('#quantity').val(),
+              price: finalPrice
             }};
 
         cart[id] = burgerString;
@@ -247,7 +261,8 @@ var AppRouter = Backbone.Router.extend({
     console.log(cart);
     var totalPrice = 0;
     for (var i = 0; i < cart.length; i++) {
-      totalPrice += cart[i].burger.price;
+      debugger
+      totalPrice += cart[i].burger.price * cart[i].burger.quantity;
       console.log(totalPrice);
     };
 
@@ -274,6 +289,13 @@ var AppRouter = Backbone.Router.extend({
   },
 
   checkout: function(){
+    var cart = JSON.parse(localStorage.cart);
+
+    var totalPrice = 0;
+    for (var i = 0; i < cart.length; i++) {
+      totalPrice += cart[i].burger.price * cart[i].burger.quantity;
+    };
+
     var stripeResponseHandler = function(status, response) {
       var $form = $('#payment-form');
 
@@ -294,13 +316,15 @@ var AppRouter = Backbone.Router.extend({
     };
 
     var sendOrderToServer = function(token) {
+      debugger
       $.ajax({
         url: 'http://localhost:3000/orders',
         type: 'POST',
         data: { order: {
             burgers: JSON.parse(localStorage.cart),
             stripe_token: token,
-            total_price: 10
+            total_price: totalPrice,
+            user_token: localStorage.cart.authToken
           }
         },
       })
