@@ -261,7 +261,6 @@ var AppRouter = Backbone.Router.extend({
     console.log(cart);
     var totalPrice = 0;
     for (var i = 0; i < cart.length; i++) {
-      debugger
       totalPrice += cart[i].burger.price * cart[i].burger.quantity;
       console.log(totalPrice);
     };
@@ -316,12 +315,11 @@ var AppRouter = Backbone.Router.extend({
     };
 
     var sendOrderToServer = function(token) {
-      debugger
       $.ajax({
         url: 'http://localhost:3000/orders',
         type: 'POST',
         data: { order: {
-            burgers: JSON.parse(localStorage.cart),
+            items: localStorage.cart,
             stripe_token: token,
             total_price: totalPrice,
             user_token: localStorage.cart.authToken
