@@ -24,11 +24,19 @@
     <input type="text" size="4" data-stripe="exp-year"/>
   </div>
 
+  <div class="form-row">
+      <input type="radio" name='get-food' value="Pickup" >Pickup<br>
+      <input type="radio" name='get-food' value="Delivery">Delivery <input type="text" id='zip-box' hidden size="5" placeholder='Zip' pattern='\b(021[0-1][013489])|(02210)\b|\b(02[14][3-4][1234569])\b' title="Sorry, you are outside of our delivery area."/>
+  </div>
+
   <button type="submit">Submit Payment</button>
 </form>
 
 
+
     <script type="text/x-handlebars-template" id="checkout">
+      <p>Total Price: <span id=total-price>{{totalPrice}}</span></p>
+
       {{#each array}}
         <div id="burger-{{@key}}">
           {{#each this}}
