@@ -321,10 +321,11 @@ var AppRouter = Backbone.Router.extend({
         data: { order: {
             items: localStorage.cart,
             stripe_token: token,
-            total_price: totalPrice,
-            user_token: localStorage.cart.authToken
+            total_price: totalPrice
           }
         },
+        headers: {"AUTHORIZATION": "Token token=" + localStorage.authToken }
+        // 'Token token=undefined'
       })
       .done(function() {
         console.log("success");
