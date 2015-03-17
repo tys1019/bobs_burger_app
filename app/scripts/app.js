@@ -261,7 +261,7 @@ var AppRouter = Backbone.Router.extend({
     console.log(cart);
     var totalPrice = 0;
     for (var i = 0; i < cart.length; i++) {
-      debugger
+
       totalPrice += cart[i].burger.price * cart[i].burger.quantity;
       console.log(totalPrice);
     };
