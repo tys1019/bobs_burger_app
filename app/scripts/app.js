@@ -258,11 +258,10 @@ var AppRouter = Backbone.Router.extend({
   showCart: function(){
     $('#container').empty();
     var cart = JSON.parse(localStorage.cart);
-    console.log(cart);
+
     var totalPrice = 0;
     for (var i = 0; i < cart.length; i++) {
       totalPrice += cart[i].burger.price * cart[i].burger.quantity;
-      console.log(totalPrice);
     };
 
     var template = Handlebars.compile($('#shoppingCart').html());
@@ -374,8 +373,15 @@ App.addToCart = function(data){
   var cart;
   localStorage.cart ? cart = JSON.parse(localStorage.cart) : cart = [];
 
+  var ingredients = [];
+  data.ingredients.forEach(function(item){
+    ingredients.push(item.name);
+  });
+
   var obj = {};
   obj.burger = data;
+  obj.burger.ingredients = ingredients;
+  obj.burger.quantity = $('#quantity').val();
 
   cart.push(obj);
   localStorage.cart = JSON.stringify(cart);

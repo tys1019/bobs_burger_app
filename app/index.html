@@ -125,6 +125,10 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
         {{#each burger.ingredients}}
           <h4>{{category}}: {{name}}</h4>
         {{/each}}
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" min="1" max="100" value="1">
+        </div>
         <button type="button" class="btn btn-default" id="addToCart">Add To Cart</button>
       </div>
     </script>
