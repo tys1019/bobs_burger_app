@@ -283,6 +283,7 @@ var AppRouter = Backbone.Router.extend({
       $('#burger-' + id).fadeOut(function(){
         this.remove();
       });
+      document.location.reload(true);
     });
   },
 
