@@ -3,23 +3,38 @@
 <head>
     <meta charset="utf-8">
     <title>Mocha Spec Runner</title>
-    <link rel="stylesheet" href="bower_components/mocha/mocha.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="lib/mocha.css" />
+    <script src="lib/mocha.js"></script>
+    <script src="lib/chai.js"></script>
+    <script src="lib/sinon.js"></script>
+
 </head>
 <body>
     <div id="mocha"></div>
-    <script src="bower_components/mocha/mocha.js"></script>
+<!--     <script src="bower_components/mocha/mocha.js"></script>
     <script>mocha.setup('bdd')</script>
-    <script src="bower_components/chai/chai.js"></script>
-    <script>
+    <script src="bower_components/chai/chai.js"></script> -->
+<!--     <script>
         var assert = chai.assert;
         var expect = chai.expect;
         var should = chai.should();
+    </script> -->
+    <script>
+        // Setup.
+        var expect = chai.expect;
+        mocha.setup("bdd");
+        // Run tests on window load event.
+        window.onload = function () {
+        mocha.run();
+        };
     </script>
 
     <!-- include source files here... -->
-
     <!-- include spec files here... -->
-    <script src="spec/test.js"></script>
+    <script src="spec/test.spec.js"></script>
+    <script src="spec/backbone.spec.js"></script>
 
     <script>mocha.run()</script>
 </body>

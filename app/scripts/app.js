@@ -321,7 +321,6 @@ var AppRouter = Backbone.Router.extend({
         data: { order: {
             items: localStorage.cart,
             stripe_token: token,
-            total_price: totalPrice,
             total_price: $('#total-price').text()
           }
         },
