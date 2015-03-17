@@ -1,0 +1,15 @@
+div.burgers {
+  @extend .panel, .col-xs-10, .col-xs-offset-1, .col-sm-5, .panel-primary;
+
+  div.burger-image-div {
+
+
+    img.burger-image {
+
+    }
+  }
+  div.burger-info {
+    @extend .panel-footer;
+    max-height: 240px;
+  }
+}
