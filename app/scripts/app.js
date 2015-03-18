@@ -141,7 +141,6 @@ var AppRouter = Backbone.Router.extend({
       }).done(function(data){
 
         var filteredIngredients = _.groupBy(data, 'category');
-
         var template = Handlebars.compile($('#ingredientsSelectTemp').html());
         $('#ingredients-container').html(template({
           categories: filteredIngredients,
@@ -378,7 +377,8 @@ App.addToCart = function(data){
   cart.push(obj);
   localStorage.cart = JSON.stringify(cart);
 
-  console.log(cart);
+  App.loadCart();
+  window.location.hash = "#/burgers";
 };
 
 App.deliveryCheck = function(totalPrice){
@@ -442,8 +442,12 @@ App.loadCart = function(){
       localStorage.cart = JSON.stringify(cart);
       $('#burger-' + id).fadeOut(function(){
         this.remove();
+        App.loadCart();
       });
-      document.location.reload(true);
+    });
+
+    $('#checkout').on('click', function(){
+      window.location.hash = "#/checkout/";
     });
   };
 
@@ -453,6 +457,7 @@ $(document).ready(function(){
   App.menuToggle();
   App.loadCart();
 });
+
 
 
 
