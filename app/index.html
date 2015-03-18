@@ -23,18 +23,27 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <ul class="nav nav-pills">
-        <li><a href="#">Home</a></li>
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+      <a href="/" class="navbar-brand">Bob's Burgers</a>
+        <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+        </button>
+      </div>
+
+         <ul class='nav navbar-nav navbar-right collapse navbar-collapse'>
         <li><a href="#/burgers">Menu</a></li>
         <li class="signed-in"><a href="#/orders">Orders</a></li>
         <li class='signed-out'><a href="#/users">Sign Up</a></li>
         <li class='signed-out'><a href="#/users/sign_in">Sign In</a></li>
         <li  class="signed-in" id="sign-out"><a href=''>Sign Out</a></li>
         <li><a href="#/cart">Cart</a></li>
-        <button class="btn" id='menu-toggle'></button>
-      </ul>
-    </nav>
+        </ul>
+    </div>
+  </div>
 
     <div id='full-screen'>
       <section id="container">
