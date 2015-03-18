@@ -88,11 +88,17 @@ var AppRouter = Backbone.Router.extend({
     });
     $.ajax({
       url: 'http://localhost:3000/orders',
-      type: 'GET'
-    }).done(function(data){
+      type: 'GET',
+      datatype: 'JSON'
+    }).done(function(orders){
+
+      orders.forEach(function(order){
+        order.items = JSON.parse(order.items);
+      });
+
       var template = Handlebars.compile($('#orderIndexTemplate').html());
       $('#container').html(template({
-        orders: data
+        orders: orders
       }));
     }).fail(function(err){
       console.log(err);
