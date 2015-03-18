@@ -424,7 +424,17 @@ App.deliveryCheck = function(totalPrice){
 
 };
 
+App.menuToggle = function(){
+  $('#menu-toggle').on('click', function(){
+
+  });
+};
+
 $(document).ready(function(){
   var router = new AppRouter();
   Backbone.history.start();
+  App.menuToggle();
 });
+
+
+
