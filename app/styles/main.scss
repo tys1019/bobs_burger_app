@@ -2,10 +2,23 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
+
+
+@import 'modules/mixins';
+@import 'modules/variables';
+
+
 @import 'partials/home';
 @import 'partials/menu';
 @import 'partials/slidemenu';
+<<<<<<< HEAD
 @import 'partials/orders';
+=======
+@import 'partials/footer';
+@import 'partials/loginform';
+@import 'partials/registrationform';
+
+>>>>>>> master
 
 
 

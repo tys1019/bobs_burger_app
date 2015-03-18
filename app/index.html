@@ -23,25 +23,41 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <ul class="nav nav-pills">
-        <li><a href="#">Home</a></li>
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+      <a href="/" class="navbar-brand">Bob's Burgers</a>
+        <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+        </button>
+      </div>
+
+         <ul class='nav navbar-nav navbar-right collapse navbar-collapse'>
         <li><a href="#/burgers">Menu</a></li>
-        <li><a href="#/orders">Orders</a></li>
-        <li><a href="#/users">Sign Up</a></li>
-        <li><a href="#/users/sign_in">Sign In</a></li>
-        <li id="sign-out"><a href=''>Sign Out</a></li>
+        <li class="signed-in"><a href="#/orders">Orders</a></li>
+        <li class='signed-out'><a href="#/users">Sign Up</a></li>
+        <li class='signed-out'><a href="#/users/sign_in">Sign In</a></li>
+        <li  class="signed-in" id="sign-out"><a href=''>Sign Out</a></li>
         <li><a href="#/cart">Cart</a></li>
-        <button class="btn" id='menu-toggle'></button>
-      </ul>
-    </nav>
+        </ul>
+    </div>
+  </div>
 
     <div id='full-screen'>
       <section id="container">
       </section>
     </div>
 
-
+    <footer class="footer">
+      <p>Like us on Facebook or tweet using #bobsburgers to get a free burger!</p>
+      <ul class="list-inline" id="social">
+        <li><a href="https://www.facebook.com/BobsBurgers"><img src="http://www.publicworkspartners.com/wp-content/uploads/2014/05/facebook-icon.png" class ="facebook"></a></li>
+        <li><a href="https://twitter.com/BobsBurgersFOX"><img src="https://lh3.ggpht.com/lSLM0xhCA1RZOwaQcjhlwmsvaIQYaP3c5qbDKCgLALhydrgExnaSKZdGa8S3YtRuVA=w300" class="twitter"></li>
+        <li><a href="http://bobsburgeroftheday.tumblr.com/"><img src="http://a1.mzstatic.com/us/r30/Purple3/v4/93/05/18/93051850-0228-148a-552e-3b092473d904/icon320x320.jpeg" class="tumblr"></li>
+      </ul>
+    </footer>
 
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -86,14 +102,14 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
 
     <script type="text/x-handlebars-template" id="burgerIndexTemplate">
       {{#each burgers}}
-      <a href="#/burgers/{{id}}">
+      <a class='premade' href="#/burgers/{{id}}">
         <div class="burgers">
-          <div class="burger-image-div"><img class="burger-image img-responsive" src="http://www.hdwallpaperspulse.com/wp-content/uploads/2012/10/624.PortobelloMushroom_SixDollarBurger.jpg"></div>
+          <div class="burger-image-div"><img class="burger-image img-responsive" src="{{image}}"></div>
 
           <div class="burger-info">
             <h3>{{name}}</h3>
-            <p>Price: {{price}}</p>
-              <p>
+            <p>${{price}}0</p>
+              <p class='ingredients'>
             {{#each ingredients}}
              • {{name}}
             {{/each}}
@@ -170,7 +186,7 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
           {{/each}}
         </div>
       {{/each}}
-      <button type="button" class="btn btn-danger"><a href="#/checkout">Checkout</a></button>
+      <a href="#/checkout"><button type="button" class="btn btn-danger">Checkout</button></a>
       Total Price: {{totalPrice}}
     </script>
 

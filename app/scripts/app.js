@@ -49,6 +49,13 @@ var AppRouter = Backbone.Router.extend({
       $('#container').html(template({
         burgers: data
       }));
+      // $('.premade').on('click',function(event){
+      //   event.preventDefault();
+      //   var ingredients = $(this).find('.ingredients').text().replace(/•|\n/g, '').trim().split(/\s{2,}/);
+      //  window.location.hash = "#/new-burger";
+      //   debugger
+
+      // });
     }).fail(function(err){
       console.log(err);
     });
