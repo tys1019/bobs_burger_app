@@ -64,6 +64,7 @@ App.loginSuccess = function(userData){
   localStorage.setItem('authToken', userData.token);
   console.log(userData);
   console.log('logged in!');
+  App.hideButtons();
   // window.location.href = '/';
 };
 
@@ -78,10 +79,23 @@ App.signOut = function(event){
   event.preventDefault();
   localStorage.removeItem('authToken');
   authToken = undefined;
+  App.hideButtons();
+};
+
+App.hideButtons = function(){
+  if (localStorage.authToken) {
+    $('.signed-out').hide();
+    $('.signed-in').show();
+
+  } else {
+    $('.signed-in').hide();
+    $('.signed-out').show();
+  }
 };
 
 $(document).ready(function(){
   $('#sign-out').on('click', function(event){
     App.signOut(event);
   });
+  App.hideButtons();
 });
