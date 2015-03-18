@@ -378,6 +378,7 @@ App.addToCart = function(data){
   cart.push(obj);
   localStorage.cart = JSON.stringify(cart);
 
+  App.loadCart();
   console.log(cart);
 };
 
@@ -442,8 +443,12 @@ App.loadCart = function(){
       localStorage.cart = JSON.stringify(cart);
       $('#burger-' + id).fadeOut(function(){
         this.remove();
+        App.loadCart();
       });
-      document.location.reload(true);
+    });
+
+    $('#checkout').on('click', function(){
+      window.location.hash = "#/checkout/";
     });
   };
 

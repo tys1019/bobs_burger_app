@@ -1,0 +1,21 @@
+nav#slider {
+  padding-top: 60px;
+
+  div.cart-burger {
+    @extend .panel, .col-xs-10, .col-xs-offset-1;
+    padding: 15px;
+
+    p {
+      text-align: center;
+    }
+
+    h5 {
+      text-align: center;
+    }
+
+    button {
+      @extend .col-xs-10, .col-xs-offset-1;
+      margin-top: 10px;
+    }
+  }
+}

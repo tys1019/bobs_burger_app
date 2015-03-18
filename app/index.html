@@ -186,17 +186,20 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
 
     <script type="text/x-handlebars-template" id="shoppingCart">
       {{#each array}}
-        <div id="burger-{{@key}}">
+        <div class='cart-burger' id="burger-{{@key}}">
           {{#each this}}
-            <p>{{name}}: {{quantity}}</p>
-            <p>Price: {{price}}</p>
+            <h5>{{name}}: {{quantity}}</h5>
+            <p>${{price}}0</p>
             <button type="button" class="btn btn-default edit" id="edit-{{@../key}}">Edit</button>
             <button type="button" class="btn btn-danger delete" id="delete-{{@../key}}">Delete</button>
           {{/each}}
         </div>
       {{/each}}
-      <a href="#/checkout"><button type="button" class="btn btn-danger">Checkout</button></a>
-      Total Price: {{totalPrice}}
+      <div class='cart-burger'>
+      <p>Total Price: ${{totalPrice}}0</p>
+
+      <button type="button" id='checkout' class="btn btn-success">Checkout</button>
+      </div>
     </script>
 
 
