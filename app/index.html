@@ -131,10 +131,14 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
     </script>
 
     <script type="text/x-handlebars-template" id="orderIndexTemplate">
+    <h1 id="order-header">Your Order History</h1>
       {{#each orders}}
-        <div class="orders">
-          <h2>{{burgers}}</h2>
-          <h3>{{total_price}}</h3>
+        <div class="order-div">
+          <h3>Order #{{id}}</h3>
+          {{#each items}}
+            <p>{{burger.name}}<p>
+          {{/each}}
+          <h4>Total: ${{total_price}}0 | Ordered on: {{created_at}}</h4>
         </div>
       {{/each}}
     </script>
