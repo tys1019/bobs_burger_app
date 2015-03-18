@@ -141,7 +141,6 @@ var AppRouter = Backbone.Router.extend({
       }).done(function(data){
 
         var filteredIngredients = _.groupBy(data, 'category');
-
         var template = Handlebars.compile($('#ingredientsSelectTemp').html());
         $('#ingredients-container').html(template({
           categories: filteredIngredients,
@@ -379,7 +378,7 @@ App.addToCart = function(data){
   localStorage.cart = JSON.stringify(cart);
 
   App.loadCart();
-  console.log(cart);
+  window.location.hash = "#/burgers";
 };
 
 App.deliveryCheck = function(totalPrice){
@@ -458,6 +457,7 @@ $(document).ready(function(){
   App.menuToggle();
   App.loadCart();
 });
+
 
 
 
