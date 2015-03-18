@@ -10,16 +10,21 @@ html, body {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -80px;
+  margin: 0 auto -82px;
 }
 
 .footer, .push {
-  height: 80px;
+  height: 82px;
 }
 
 .footer {
   text-align: center;
   width: 100%;
+  background-color: black;
+}
+
+ul#social {
+  margin: 0;
 }
 
 .facebook {
