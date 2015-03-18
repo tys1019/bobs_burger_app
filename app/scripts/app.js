@@ -443,7 +443,7 @@ App.loadCart = function(){
     });
 
     $('#checkout').on('click', function(){
-      window.location.hash = "#/checkout/";
+      window.location.hash = "#/checkout";
     });
   };
 
