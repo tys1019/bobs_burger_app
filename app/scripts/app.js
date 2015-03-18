@@ -29,8 +29,8 @@ var AppRouter = Backbone.Router.extend({
       console.log(err);
     }).always();
 
-    $('li').on('click', function(){
-      if ($(this).children().text() != 'Home') {
+    $('a').on('click', function(){
+      if (!$(this).hasClass('not-clear')) {
         $('#banner-image').remove();
       }
     });
@@ -432,7 +432,8 @@ App.deliveryCheck = function(totalPrice){
 };
 
 App.menuToggle = function(){
-  $('#menu-toggle').on('click', function(){
+  $('#slider').on('click', function(event){
+    event.preventDefault();
 
   });
 };
