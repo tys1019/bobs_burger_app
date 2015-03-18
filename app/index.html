@@ -161,7 +161,7 @@
           {{#each items}}
             <p>{{burger.name}}<p>
           {{/each}}
-          <h4>Total: ${{total_price}}0 | Ordered on: {{created_at}}</h4>
+          <h4>Total: ${{total_price}} | Ordered on: {{created_at}}</h4>
         </div>
       {{/each}}
     </script>
@@ -179,7 +179,7 @@
           {{#each burger.ingredients}}
             <h4>{{category}}: {{name}}</h4>
           {{/each}}
-          <h2>Price: {{burger.price}}</h2>
+          <h2>Price: ${{burger.price}}</h2>
 
           <div class="form-group">
             <label for="quantity">Quantity</label>
@@ -198,7 +198,7 @@
           <div class="burger-image-cart"><img class="burger-image img-responsive" src="{{image}}"></div>
           <div class="burger-info-cart">
             <h5>{{name}}: {{quantity}}</h5>
-            <p>${{price}}0</p>
+            <p>${{price}}</p>
             <button type="button" class="btn btn-default edit" id="edit-{{@../key}}">Edit</button>
             <button type="button" class="btn btn-danger delete" id="delete-{{@../key}}">Delete</button>
             </div>
@@ -206,7 +206,7 @@
         </div>
       {{/each}}
       <div class='cart-burger'>
-      <p>Total Price: ${{totalPrice}}0</p>
+      <p>Total Price: ${{totalPrice}}</p>
 
       <button type="button" id='checkout' class="btn btn-success">Checkout</button>
       </div>
