@@ -24,21 +24,23 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <nav class="navbar navbar-default navbar-fixed-top">
-      <ul>
+      <ul class="nav nav-pills">
         <li><a href="#">Home</a></li>
-        <li><a href="#/burgers">Burgers</a></li>
-        <li><a href="#/ingredients">Ingredients</a></li>
+        <li><a href="#/burgers">Menu</a></li>
         <li><a href="#/orders">Orders</a></li>
-        <li><a href="#/new-burger">New Burger</a></li>
         <li><a href="#/users">Sign Up</a></li>
         <li><a href="#/users/sign_in">Sign In</a></li>
-        <li><button type="button" id="sign-out">Sign Out</button></li>
+        <li id="sign-out"><a href=''>Sign Out</a></li>
         <li><a href="#/cart">Cart</a></li>
+        <button class="btn" id='menu-toggle'></button>
       </ul>
     </nav>
 
-    <section id="container">
-    </section>
+    <div id='full-screen'>
+      <section id="container">
+      </section>
+    </div>
+
 
 
 
@@ -74,28 +76,48 @@
     </script>
 
     <script type="text/x-handlebars-template" id="homeTemplate">
+    <div id="restaurant-info">
       <h1>Welcome to Bobs Burgers!</h1>
       <p>Bacon ipsum dolor amet pig ham filet mignon pork frankfurter sausage beef. Porchetta ribeye shoulder ground round. Beef corned beef jowl hamburger chuck sausage landjaeger short loin tri-tip shoulder beef ribs. Pork loin shankle tongue, spare ribs short loin andouille chicken flank meatloaf kielbasa ground round corned beef bacon biltong. Pork belly meatball tail picanha shoulder. Pig biltong shank, ground round sausage ribeye chicken porchetta.
 
 Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swine leberkas rump. Meatloaf cow venison ham hock alcatra corned beef filet mignon, tri-tip short ribs. Salami jerky bacon chuck. Cupim hamburger frankfurter fatback andouille shoulder ham hock shankle short loin filet mignon ground round chuck tongue turkey.</p>
+  </div>
     </script>
 
     <script type="text/x-handlebars-template" id="burgerIndexTemplate">
       {{#each burgers}}
+      <a href="#/burgers/{{id}}">
         <div class="burgers">
-          <h2>{{name}} <button class="btn btn-default"><a href="#/burgers/{{id}}">View</a></button></h2>
-          <p>Price: {{price}}</p>
-          {{#each ingredients}}
-            <p>{{name}}</p>
-          {{/each}}
+          <div class="burger-image-div"><img class="burger-image img-responsive" src="http://www.hdwallpaperspulse.com/wp-content/uploads/2012/10/624.PortobelloMushroom_SixDollarBurger.jpg"></div>
+
+          <div class="burger-info">
+            <h3>{{name}}</h3>
+            <p>Price: {{price}}</p>
+              <p>
+            {{#each ingredients}}
+             • {{name}}
+            {{/each}}
+             • </p>
+            </div>
         </div>
+        </a>
       {{/each}}
-      <div>
-        <h2><a href="#/new-burger">Create your Own!</a></h2>
-      </div>
+
+        <a href="#/new-burger">
+        <div class="burgers">
+          <div class="burger-image-div"><img class="burger-image img-responsive" src="http://www.hdwallpaperspulse.com/wp-content/uploads/2012/10/624.PortobelloMushroom_SixDollarBurger.jpg"></div>
+
+          <div class="burger-info">
+            <h3>Create your Own!</h3>
+          </div>
+        </div>
+        </a>
+
     </script>
 
     <script type="text/x-handlebars-template" id="ingredientIndexTemplate">
+
+
       {{#each categories}}
         <div class="ingredients">
           <h2>{{@key}}</h2>
