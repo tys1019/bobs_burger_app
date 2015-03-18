@@ -12,7 +12,6 @@ var AppRouter = Backbone.Router.extend({
     'new-burger': 'newBurger',
     'ingredients': 'getIngredients',
     'orders': 'getOrders',
-    'cart': 'showCart',
     'edit-burger/:id': 'editBurger',
     'checkout': 'checkout'
   },
@@ -181,7 +180,7 @@ var AppRouter = Backbone.Router.extend({
 
         $('input:checked').prop('checked', false);
         $('#burger-name-input').val('');
-        window.location.hash = "#/cart";
+        window.location.hash = "#/burgers";
 
 
 
@@ -262,44 +261,13 @@ var AppRouter = Backbone.Router.extend({
         $('input:checked').prop('checked', false);
         $('#burger-name-input').val('');
 
-        window.location.hash = "#/cart";
+        window.location.hash = "#/burgers";
 
       });
      });
 
   },
 
-  showCart: function(){
-    $('#container').empty();
-    var cart = JSON.parse(localStorage.cart);
-
-    var totalPrice = 0;
-    for (var i = 0; i < cart.length; i++) {
-      totalPrice += cart[i].burger.price * cart[i].burger.quantity;
-    };
-
-    var template = Handlebars.compile($('#shoppingCart').html());
-    $('#container').html(template({
-      array: cart,
-      totalPrice: totalPrice
-    }));
-
-    $('.edit').on('click', function(event){
-      var id = parseInt(this.id.match(/\d/g));
-      window.location.hash = "#/edit-burger/" + id;
-    });
-
-    $('.delete').on('click', function(event){
-      var id = parseInt(this.id.match(/\d/g));
-      var cart = JSON.parse(localStorage.cart);
-      cart.splice(id, 1);
-      localStorage.cart = JSON.stringify(cart);
-      $('#burger-' + id).fadeOut(function(){
-        this.remove();
-      });
-      document.location.reload(true);
-    });
-  },
 
   checkout: function(){
     var cart = JSON.parse(localStorage.cart);
@@ -432,16 +400,52 @@ App.deliveryCheck = function(totalPrice){
 };
 
 App.menuToggle = function(){
-  $('#slider').on('click', function(event){
+  $('#showRightPush').on('click', function(event){
     event.preventDefault();
+
+    $(this).toggleClass('active');
+    $('body').toggleClass('cbp-spmenu-push-toleft' );
+    $('#slider').toggleClass('cbp-spmenu-open' );
 
   });
 };
+
+App.loadCart = function(){
+    var cart = JSON.parse(localStorage.cart);
+
+    var totalPrice = 0;
+    for (var i = 0; i < cart.length; i++) {
+      totalPrice += cart[i].burger.price * cart[i].burger.quantity;
+    };
+
+    var template = Handlebars.compile($('#shoppingCart').html());
+    $('#slider').html(template({
+      array: cart,
+      totalPrice: totalPrice
+    }));
+
+    $('.edit').on('click', function(event){
+      var id = parseInt(this.id.match(/\d/g));
+      window.location.hash = "#/edit-burger/" + id;
+    });
+
+    $('.delete').on('click', function(event){
+      var id = parseInt(this.id.match(/\d/g));
+      var cart = JSON.parse(localStorage.cart);
+      cart.splice(id, 1);
+      localStorage.cart = JSON.stringify(cart);
+      $('#burger-' + id).fadeOut(function(){
+        this.remove();
+      });
+      document.location.reload(true);
+    });
+  };
 
 $(document).ready(function(){
   var router = new AppRouter();
   Backbone.history.start();
   App.menuToggle();
+  App.loadCart();
 });
 
 
