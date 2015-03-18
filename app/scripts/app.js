@@ -24,7 +24,7 @@ var AppRouter = Backbone.Router.extend({
       $('#container').append(template());
 
 
-    $('a, button').on('click', function(){
+    $('a').on('click', function(){
       if (!$(this).hasClass('not-clear')) {
         $('#banner-image').remove();
       }
@@ -401,6 +401,11 @@ App.deliveryCheck = function(totalPrice){
 
 };
 
+App.freshPage = function(){
+  $('#container').empty();
+  $('#banner-image').hide();
+};
+
 App.menuToggle = function(){
   $('#showRightPush').on('click', function(event){
     event.preventDefault();
@@ -427,6 +432,7 @@ App.loadCart = function(){
     }));
 
     $('.edit').on('click', function(event){
+      $('#banner-image').hide();
       var id = parseInt(this.id.match(/\d/g));
       window.location.hash = "#/edit-burger/" + id;
     });
@@ -443,6 +449,7 @@ App.loadCart = function(){
     });
 
     $('#checkout').on('click', function(){
+      $('#banner-image').hide();
       window.location.hash = "#/checkout";
     });
   };
