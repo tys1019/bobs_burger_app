@@ -40,7 +40,7 @@ var AppRouter = Backbone.Router.extend({
   getBurgers: function(){
     $('#container').empty();
     $.ajax({
-      url: 'http://localhost:3000/burgers',
+      url: App.apiLocation + 'burgers',
       type: 'GET'
     }).done(function(data){
       console.log(data);
@@ -63,7 +63,7 @@ var AppRouter = Backbone.Router.extend({
   getIngredients: function(){
     $('#container').empty();
     $.ajax({
-      url: 'http://localhost:3000/ingredients',
+      url: App.apiLocation + 'ingredients',
       type: 'GET'
     }).done(function(data){
 
@@ -86,7 +86,7 @@ var AppRouter = Backbone.Router.extend({
       options.headers['AUTHORIZATION'] = "Token token=" + authToken;
     });
     $.ajax({
-      url: 'http://localhost:3000/orders',
+      url: App.apiLocation + 'orders',
       type: 'GET',
       datatype: 'JSON'
     }).done(function(orders){
@@ -111,7 +111,7 @@ var AppRouter = Backbone.Router.extend({
   showBurgers: function(id){
     $('#container').empty();
     $.ajax({
-      url: 'http://localhost:3000/burgers/' + id,
+      url: App.apiLocation + 'burgers/' + id,
       type: 'GET'
     }).done(function(data){
 
@@ -136,7 +136,7 @@ var AppRouter = Backbone.Router.extend({
     $('#container').empty().load('partials/burger-form.html', function(){
 
       $.ajax({
-        url: 'http://localhost:3000/ingredients',
+        url: App.apiLocation + 'ingredients',
         type: 'GET'
       }).done(function(data){
 
@@ -201,7 +201,7 @@ var AppRouter = Backbone.Router.extend({
         var burger = cart[id];
 
         $.ajax({
-          url: 'http://localhost:3000/ingredients',
+          url: App.apiLocation + 'ingredients',
           type: 'GET'
         }).done(function(data){
 
@@ -303,7 +303,7 @@ var AppRouter = Backbone.Router.extend({
 
     var sendOrderToServer = function(token) {
       $.ajax({
-        url: 'http://localhost:3000/orders',
+        url: App.apiLocation + 'orders',
         type: 'POST',
         data: { order: {
             items: localStorage.cart,
@@ -450,6 +450,8 @@ App.loadCart = function(){
       window.location.hash = "#/checkout/";
     });
   };
+
+App.apiLocation = "https://bobsburgersapi.herokuapp.com/";
 
 $(document).ready(function(){
   var router = new AppRouter();
