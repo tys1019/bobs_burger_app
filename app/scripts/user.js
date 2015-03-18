@@ -15,7 +15,7 @@ var UserRouter = Backbone.Router.extend({
       $form.on('submit', function(event){
         event.preventDefault();
         $.ajax({
-          url: 'http://localhost:3000/users',
+          url: App.apiLocation + 'users',
           type: 'POST',
           data: { user: {
             name: $('#user-name').val(),
@@ -37,7 +37,7 @@ var UserRouter = Backbone.Router.extend({
       $form.on('submit', function(event){
         event.preventDefault();
         $.ajax({
-          url: 'http://localhost:3000/users/sign_in',
+          url: App.apiLocation + 'users/sign_in',
           type: 'POST',
           data: { user: {
             email: $('#user-email').val(),
