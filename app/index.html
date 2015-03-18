@@ -44,28 +44,29 @@
         </ul>
     </div>
   </div>
-
+  <div class="wrapper">
     <div id='full-screen'>
       <section id="container">
       </section>
     </div>
+    <div class="push"></div>
+  </div>
+
 
   <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="slider">
-    <h3>Menu</h3>
-    <p> Test</p>
-    <p> Test</p>
-    <p> Test</p>
-
   </nav>
 
-    <footer class="footer">
+
+
+    <div class="footer">
+
       <p>Like us on Facebook or tweet using #bobsburgers to get a free burger!</p>
       <ul class="list-inline" id="social">
         <li><a href="https://www.facebook.com/BobsBurgers"><img src="http://www.publicworkspartners.com/wp-content/uploads/2014/05/facebook-icon.png" class ="facebook"></a></li>
         <li><a href="https://twitter.com/BobsBurgersFOX"><img src="https://lh3.ggpht.com/lSLM0xhCA1RZOwaQcjhlwmsvaIQYaP3c5qbDKCgLALhydrgExnaSKZdGa8S3YtRuVA=w300" class="twitter"></li>
         <li><a href="http://bobsburgeroftheday.tumblr.com/"><img src="http://a1.mzstatic.com/us/r30/Purple3/v4/93/05/18/93051850-0228-148a-552e-3b092473d904/icon320x320.jpeg" class="tumblr"></li>
       </ul>
-    </footer>
+    </div>
 
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -155,10 +156,14 @@ Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swi
     </script>
 
     <script type="text/x-handlebars-template" id="orderIndexTemplate">
+    <h1 id="order-header">Your Order History</h1>
       {{#each orders}}
-        <div class="orders">
-          <h2>{{burgers}}</h2>
-          <h3>{{total_price}}</h3>
+        <div class="order-div">
+          <h3>Order #{{id}}</h3>
+          {{#each items}}
+            <p>{{burger.name}}<p>
+          {{/each}}
+          <h4>Total: ${{total_price}}0 | Ordered on: {{created_at}}</h4>
         </div>
       {{/each}}
     </script>

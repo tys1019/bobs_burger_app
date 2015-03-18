@@ -1,8 +1,24 @@
-footer {
-  text-align: center;
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -80px;
+}
+
+.footer, .push {
   height: 80px;
-  position: absolute;
-  bottom: 0;
+}
+
+.footer {
+  text-align: center;
   width: 100%;
 }
 
