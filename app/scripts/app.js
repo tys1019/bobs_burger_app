@@ -19,14 +19,10 @@ var AppRouter = Backbone.Router.extend({
   home: function(){
     $('#container').empty();
     $('#full-screen').prepend('<img id=banner-image class=img-responsive src="/images/bob.jpg">');
-    $.ajax({
-      url: 'http://localhost:9000'
-    }).done(function(){
+
       var template = Handlebars.compile($('#homeTemplate').html());
       $('#container').append(template());
-    }).fail(function(err){
-      console.log(err);
-    }).always();
+
 
     $('a').on('click', function(){
       if (!$(this).hasClass('not-clear')) {
