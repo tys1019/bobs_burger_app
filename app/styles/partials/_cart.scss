@@ -1,5 +1,7 @@
 nav#slider {
   padding-top: 60px;
+  background-color: #85c2ff;
+  border-left: 3px solid black;
 
   div.cart-burger {
     @extend .panel, .col-xs-10, .col-xs-offset-1;

@@ -1,3 +1,16 @@
 .navbar {
   background-color: black;
+
+  .container {
+    a {
+      color: white;
+    }
+    ul {
+      li {
+        a {
+          color: white;
+        }
+      }
+    }
+  }
 }
