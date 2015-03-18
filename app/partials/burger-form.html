@@ -13,14 +13,25 @@
 </form>
 
 <script type="text/x-handlebars-template" id="ingredientsSelectTemp">
-  {{#each categories}}
-    <div class="ingredients" id={{@key}}>
-      <h2>{{@key}}</h2>
-      <ul>
-      {{#each this}}
-        <input type="checkbox" data-category="{{@../key}}" id="ingredient-{{this.id}}" value="{{this.name}}" />{{this.name}}<br />
-      {{/each}}
-      </ul>
+  <div class="panel-group" id="accordion">
+    {{#each categories}}
+    <div class="panel panel-default">
+      <div class="panel-heading" id={{@key}}>
+          <h3 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{@key}}">{{@key}}</a>
+          </h3>
+      </div>
+      <div id="collapse-{{@key}}" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ul>
+          {{#each this}}
+            <input type="checkbox" data-category="{{@../key}}" id="ingredient-{{this.id}}" value="{{this.name}}" />{{this.name}}<br />
+          {{/each}}
+        </ul>
+        </div>
+      </div>
     </div>
-  {{/each}}
+    {{/each}}
+  </div>
 </script>
+
