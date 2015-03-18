@@ -27,11 +27,7 @@
     <div class="container">
       <div class="navbar-header">
       <a href="/" class="navbar-brand not-clear">Bob's Burgers</a>
-        <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
-          <span class='icon-bar'></span>
-          <span class='icon-bar'></span>
-          <span class='icon-bar'></span>
-        </button>
+
       </div>
 
          <ul class='nav navbar-nav navbar-right collapse navbar-collapse'>
@@ -40,33 +36,37 @@
         <li class='signed-out'><a href="#/users">Sign Up</a></li>
         <li class='signed-out'><a href="#/users/sign_in">Sign In</a></li>
         <li  class="signed-in" id="sign-out"><a href=''>Sign Out</a></li>
-        <li><a id='showRightPush' class='not-clear' href="">Cart</a></li>
+        <li><a href="#/cart">Cart</a></li>
+        <li><a id='showRightPush' class='not-clear' href="">Slider</a></li>
+
         </ul>
     </div>
   </div>
-  <div class="wrapper">
+
+  <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+  <h3>Menu</h3>
+  <a href="#">Celery seakale</a>
+  <a href="#">Dulse daikon</a>
+  <a href="#">Zucchini garlic</a>
+  <a href="#">Catsear azuki bean</a>
+  <a href="#">Dandelion bunya</a>
+  <a href="#">Rutabaga</a>
+</nav>
+
     <div id='full-screen'>
       <section id="container">
       </section>
     </div>
-    <div class="push"></div>
-  </div>
 
 
-  <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="slider">
-  </nav>
-
-
-
-    <div class="footer">
-
+    <footer class="footer">
       <p>Like us on Facebook or tweet using #bobsburgers to get a free burger!</p>
       <ul class="list-inline" id="social">
         <li><a href="https://www.facebook.com/BobsBurgers"><img src="http://www.publicworkspartners.com/wp-content/uploads/2014/05/facebook-icon.png" class ="facebook"></a></li>
         <li><a href="https://twitter.com/BobsBurgersFOX"><img src="https://lh3.ggpht.com/lSLM0xhCA1RZOwaQcjhlwmsvaIQYaP3c5qbDKCgLALhydrgExnaSKZdGa8S3YtRuVA=w300" class="twitter"></li>
         <li><a href="http://bobsburgeroftheday.tumblr.com/"><img src="http://a1.mzstatic.com/us/r30/Purple3/v4/93/05/18/93051850-0228-148a-552e-3b092473d904/icon320x320.jpeg" class="tumblr"></li>
       </ul>
-    </div>
+    </footer>
 
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -108,99 +108,5 @@
 Venison ball tip meatloaf bresaola. Filet mignon shank drumstick, short ribs swine leberkas rump. Meatloaf cow venison ham hock alcatra corned beef filet mignon, tri-tip short ribs. Salami jerky bacon chuck. Cupim hamburger frankfurter fatback andouille shoulder ham hock shankle short loin filet mignon ground round chuck tongue turkey.</p>
   </div>
     </script>
-
-    <script type="text/x-handlebars-template" id="burgerIndexTemplate">
-      {{#each burgers}}
-      <a class='premade' href="#/burgers/{{id}}">
-        <div class="burgers">
-          <div class="burger-image-div"><img class="burger-image img-responsive" src="{{image}}"></div>
-
-          <div class="burger-info">
-            <h3>{{name}}</h3>
-            <p>${{price}}0</p>
-              <p class='ingredients'>
-            {{#each ingredients}}
-             • {{name}}
-            {{/each}}
-             • </p>
-            </div>
-        </div>
-        </a>
-      {{/each}}
-
-        <a href="#/new-burger">
-        <div class="burgers">
-          <div class="burger-image-div"><img class="burger-image img-responsive" src="http://www.hdwallpaperspulse.com/wp-content/uploads/2012/10/624.PortobelloMushroom_SixDollarBurger.jpg"></div>
-
-          <div class="burger-info">
-            <h3>Create your Own!</h3>
-          </div>
-        </div>
-        </a>
-
-    </script>
-
-    <script type="text/x-handlebars-template" id="ingredientIndexTemplate">
-
-
-      {{#each categories}}
-        <div class="ingredients">
-          <h2>{{@key}}</h2>
-          <ul>
-          {{#each this}}
-            <li data-category="{{@../key}}" id="ingredient-{{this.id}}">{{this.name}}</li>
-          {{/each}}
-          </ul>
-        </div>
-      {{/each}}
-    </script>
-
-    <script type="text/x-handlebars-template" id="orderIndexTemplate">
-    <h1 id="order-header">Your Order History</h1>
-      {{#each orders}}
-        <div class="order-div">
-          <h3>Order #{{id}}</h3>
-          {{#each items}}
-            <p>{{burger.name}}<p>
-          {{/each}}
-          <h4>Total: ${{total_price}}0 | Ordered on: {{created_at}}</h4>
-        </div>
-      {{/each}}
-    </script>
-
-    <script type="text/x-handlebars-template" id="burgerShowTemp">
-      <div>
-        <h2>{{burger.name}}</h2>
-        <p>{{burger.price}}</p>
-        <h3>Ingredients:</h3>
-        {{#each burger.ingredients}}
-          <h4>{{category}}: {{name}}</h4>
-        {{/each}}
-        <div class="form-group">
-          <label for="quantity">Quantity</label>
-          <input type="number" id="quantity" min="1" max="100" value="1">
-        </div>
-        <button type="button" class="btn btn-default" id="addToCart">Add To Cart</button>
-      </div>
-    </script>
-
-    <script type="text/x-handlebars-template" id="shoppingCart">
-      {{#each array}}
-        <div id="burger-{{@key}}">
-          {{#each this}}
-            <p>{{name}}: {{quantity}}</p>
-            <p>Price: {{price}}</p>
-            <button type="button" class="btn btn-default edit" id="edit-{{@../key}}">Edit</button>
-            <button type="button" class="btn btn-danger delete" id="delete-{{@../key}}">Delete</button>
-          {{/each}}
-        </div>
-      {{/each}}
-      <a href="#/checkout"><button type="button" class="btn btn-danger">Checkout</button></a>
-      Total Price: {{totalPrice}}
-    </script>
-
-
-
-
   </body>
 </html>
