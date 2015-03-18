@@ -18,7 +18,7 @@ var AppRouter = Backbone.Router.extend({
 
   home: function(){
     $('#container').empty();
-    $('#full-screen').prepend('<img id=banner-image class=img-responsive src="/images/bob.jpg">');
+    $('#full-screen').prepend('<img id=banner-image class=img-responsive src="/bobs_burger_app/images/bob.jpg">');
 
       var template = Handlebars.compile($('#homeTemplate').html());
       $('#container').append(template());

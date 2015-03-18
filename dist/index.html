@@ -1,0 +1,88 @@
+<!DOCTYPE html> <html class=no-js> <head> <meta charset=utf-8> <title>bobs_burgers_app</title> <meta name=description content=""> <meta name=viewport content="width=device-width"> <link rel="shortcut icon" href=/6df2b309.favicon.ico> <!-- Place favicon.ico and apple-touch-icon.png in the root directory --> <link rel=stylesheet href=styles/227ae3f3.main.css> <script src=scripts/vendor/fbe20327.modernizr.js></script>  <body> <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]--> <div class="navbar navbar-default navbar-fixed-top"> <div class=container> <div class=navbar-header> <a href="/" class="navbar-brand not-clear nav-link">Bob's Burgers</a> <button type=button class=navbar-toggle data-toggle=collapse data-target=.navbar-collapse> <span class=icon-bar></span> <span class=icon-bar></span> <span class=icon-bar></span> </button> </div> <ul class="nav navbar-nav navbar-right collapse navbar-collapse"> <li><a class=nav-link href=#/burgers>Menu</a></li> <li class=signed-in><a class=nav-link href=#/orders>Orders</a></li> <li class=signed-out><a class=nav-link href=#/users>Sign Up</a></li> <li class=signed-out><a class=nav-link href=#/users/sign_in>Sign In</a></li> <li class=signed-in id=sign-out><a class=nav-link href>Sign Out</a></li> <li><a id=showRightPush class="not-clear nav-link" href="">Cart</a></li> </ul> </div> </div> <div class=wrapper> <div id=full-screen> <section id=container> </section> </div> <div class=push></div> </div> <nav id=slider> </nav> <div class=footer> <p>Like us on Facebook or tweet using #bobsburgers to get a free burger!</p> <ul class=list-inline id=social> <li><a href=https://www.facebook.com/BobsBurgers><img src=http://www.publicworkspartners.com/wp-content/uploads/2014/05/facebook-icon.png class=facebook></a></li> <li><a href=https://twitter.com/BobsBurgersFOX><img src="https://lh3.ggpht.com/lSLM0xhCA1RZOwaQcjhlwmsvaIQYaP3c5qbDKCgLALhydrgExnaSKZdGa8S3YtRuVA=w300" class=twitter></a></li> <li><a href="http://bobsburgeroftheday.tumblr.com/"><img src=http://a1.mzstatic.com/us/r30/Purple3/v4/93/05/18/93051850-0228-148a-552e-3b092473d904/icon320x320.jpeg class=tumblr></a></li> </ul> </div> <script src=scripts/56dbcf04.vendor.js></script> <script src=scripts/e04feec1.main.js></script> <script type=text/javascript src="https://js.stripe.com/v2/"></script> <script type=text/javascript>Stripe.setPublishableKey('pk_test_IY5irc1eNOxYQ6xMlavhENaa');</script> <script type=text/x-handlebars-template id=homeTemplate><div id="restaurant-info">
+      <h1>Welcome to Bobs Burgers!</h1>
+      <p>Bob Belcher is a third-generation restaurateur who runs Bob's Burgers with his loving wife and their three children. Bob believes his burgers speak for themselves and isn't afraid to offer a variety of off-beat creations. Bob's wife, Linda, supports his dream but is becoming sick of the slow times, as the restaurant is constantly in danger of going out of business. Despite the challenges, which includes consistent harassment from Linda's ex -- a health inspector -- Bob tries to keep the grill sizzling.</p>
+  </div></script> <script type=text/x-handlebars-template id=burgerIndexTemplate>{{#each burgers}}
+      <div class="burgers">
+        <a class='premade' href="#/burgers/{{id}}">
+          <div class="burger-image-div"><img class="burger-image img-responsive" src="{{image}}"></div>
+
+          <div class="burger-info">
+            <h3>{{name}}</h3>
+            <p>${{price}}</p>
+              <p class='ingredients'>
+            {{#each ingredients}}
+             • {{name}}
+            {{/each}}
+             • </p>
+            </div>
+        </div>
+        </a>
+      {{/each}}
+
+        <div class="burgers">
+          <a href="#/new-burger">
+          <div class="burger-image-div"><img class="burger-image img-responsive" src="http://www.hdwallpaperspulse.com/wp-content/uploads/2012/10/624.PortobelloMushroom_SixDollarBurger.jpg"></div>
+
+          <div class="burger-info">
+            <h3>Create your Own!</h3>
+          </div>
+        </div>
+        </a></script> <script type=text/x-handlebars-template id=ingredientIndexTemplate>{{#each categories}}
+        <div class="ingredients">
+          <h2>{{@key}}</h2>
+          <ul>
+          {{#each this}}
+            <li data-category="{{@../key}}" id="ingredient-{{this.id}}">{{this.name}}</li>
+          {{/each}}
+          </ul>
+        </div>
+      {{/each}}</script> <script type=text/x-handlebars-template id=orderIndexTemplate><h1 id="order-header">Your Order History</h1>
+      {{#each orders}}
+        <div class="order-div">
+          <h3>Order #{{id}}</h3>
+          {{#each items}}
+            <p>{{burger.name}}<p>
+          {{/each}}
+          <h4>Total: ${{total_price}}0 | Ordered on: {{created_at}}</h4>
+        </div>
+      {{/each}}</script> <script type=text/x-handlebars-template id=burgerShowTemp><div class="row">
+        <div class="col-md-8">
+          <div class="showburgers">
+            <h2>{{burger.name}}</h2>
+            <img class="burger-image" src="{{burger.image}}">
+          </div>
+        </div>
+        <div class="col-md-4 burgerinfo">
+          <h2>Ingredients:</h2>
+          {{#each burger.ingredients}}
+            <h4>{{category}}: {{name}}</h4>
+          {{/each}}
+          <h2>Price: {{burger.price}}</h2>
+
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" class="form-control" min="1" max="100" value="1">
+          </div>
+          <button type="button" class="btn btn-default" id="addToCart">Add To Cart</button>
+          </div>
+        </div>
+      </div></script> <script type=text/x-handlebars-template id=shoppingCart>{{#each array}}
+        <div class='cart-burger' id="burger-{{@key}}">
+          {{#each this}}
+          <div class="burger-image-cart"><img class="burger-image img-responsive" src="{{image}}"></div>
+          <div class="burger-info-cart">
+            <h5>{{name}}: {{quantity}}</h5>
+            <p>${{price}}0</p>
+            <button type="button" class="btn btn-default edit" id="edit-{{@../key}}">Edit</button>
+            <button type="button" class="btn btn-danger delete" id="delete-{{@../key}}">Delete</button>
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
+      <div class='cart-burger'>
+      <p>Total Price: ${{totalPrice}}0</p>
+
+      <button type="button" id='checkout' class="btn btn-success">Checkout</button>
+      </div></script>  
