@@ -1,0 +1,20 @@
+<form id=new-burger-form> <div class=form-group> <label for=burger-name>Burger Name</label> <input class=form-control placeholder="Enter a name" id="burger-name-input"> </div> <div class=form-group> <label for=quantity>Quantity</label> <input type=number id=quantity min=1 max=100> </div> <section id=ingredients-container> </section> <button type=submit>Submit</button> </form> <script type=text/x-handlebars-template id=ingredientsSelectTemp><div class="panel-group" id="accordion">
+    {{#each categories}}
+    <div class="panel panel-default">
+      <div class="panel-heading" id={{@key}}>
+          <h3 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{@key}}">{{@key}}</a>
+          </h3>
+      </div>
+      <div id="collapse-{{@key}}" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ul>
+          {{#each this}}
+            <input type="checkbox" data-category="{{@../key}}" id="ingredient-{{this.id}}" value="{{this.name}}" />{{this.name}}<br />
+          {{/each}}
+        </ul>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div></script>
