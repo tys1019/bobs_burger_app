@@ -24,7 +24,7 @@ var AppRouter = Backbone.Router.extend({
       $('#container').append(template());
 
 
-    $('a').on('click', function(){
+    $('a, button').on('click', function(){
       if (!$(this).hasClass('not-clear')) {
         $('#banner-image').remove();
       }
