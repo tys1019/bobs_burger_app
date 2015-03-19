@@ -292,7 +292,7 @@ var AppRouter = Backbone.Router.extend({
         sendOrderToServer(token);
         // and submit
         $('#container').fadeOut(function(){
-          $(this).html($('<div id=success>ORDER SUBMITTED!</div>')).fadeIn();
+          $(this).html($('<h1 id=success>ORDER SUBMITTED! Thank You!</h1>')).fadeIn();
         });
       }
     };
