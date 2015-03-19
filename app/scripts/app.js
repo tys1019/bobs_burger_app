@@ -312,6 +312,8 @@ var AppRouter = Backbone.Router.extend({
       .done(function() {
         console.log("success");
         localStorage.removeItem('cart');
+        App.loadCart();
+
       })
       .fail(function() {
         console.log("error");
@@ -418,6 +420,7 @@ App.menuToggle = function(){
 };
 
 App.loadCart = function(){
+    $('.cart-burger').remove();
     var cart = JSON.parse(localStorage.cart);
 
     var totalPrice = 0;
