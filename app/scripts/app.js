@@ -40,6 +40,7 @@ var AppRouter = Backbone.Router.extend({
       type: 'GET'
     }).done(function(data){
       console.log(data);
+      data.forEach(function(e) { (e.price = parseFloat(e.price).toFixed(2)) } );
       var template = Handlebars.compile($('#burgerIndexTemplate').html());
       $('#container').html(template({
         burgers: data
@@ -110,7 +111,7 @@ var AppRouter = Backbone.Router.extend({
       url: App.apiLocation + 'burgers/' + id,
       type: 'GET'
     }).done(function(data){
-
+      data.price = parseFloat(data.price).toFixed(2);
       var template = Handlebars.compile($('#burgerShowTemp').html());
       $('#container').html(template({
         burger: data
@@ -233,15 +234,10 @@ var AppRouter = Backbone.Router.extend({
                               array[i] = $(this).val();
                               return array;
                             });
-        var array = [];
-        var $selected = $('input:checked').map(function(i){
-                              array[i] = $(this).val();
-                              return array;
-                            });
 
         var defaultPrice = 6.50;
         var premiumArray = [];
-        var addPremium = $('div#premium input:checked').map(function(i){
+        var addPremium = $('div#collapse-premium input:checked').map(function(i){
           premiumArray[i] = $(this).val();
         });
 
@@ -261,6 +257,7 @@ var AppRouter = Backbone.Router.extend({
 
         $('input:checked').prop('checked', false);
         $('#burger-name-input').val('');
+        App.loadCart();
 
         window.location.hash = "#/burgers";
 
@@ -312,6 +309,8 @@ var AppRouter = Backbone.Router.extend({
       .done(function() {
         console.log("success");
         localStorage.removeItem('cart');
+        App.loadCart();
+
       })
       .fail(function() {
         console.log("error");
@@ -418,6 +417,7 @@ App.menuToggle = function(){
 };
 
 App.loadCart = function(){
+    $('.cart-burger').remove();
     var cart = JSON.parse(localStorage.cart);
 
     var totalPrice = 0;
