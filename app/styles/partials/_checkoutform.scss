@@ -1,11 +1,20 @@
 #checkout-form {
-  margin: 0 auto;
-  width: 250px;
+  @extend .panel, .col-xs-10, .col-xs-offset-1, .col-sm-4;
+ background-color: $well-bg;
+ border: 2px solid black;
+ border-radius: 10px;
+ padding: 10px;
+ margin: 20px;
 }
 
 #checkout-handlebar {
-  margin: 0 auto;
-  width: 250px;
+
+  @extend .panel, .col-xs-10, .col-xs-offset-1, .col-sm-6;
+ background-color: $well-bg;
+ border: 2px solid black;
+ border-radius: 10px;
+ padding: 10px;
+ margin: 20px;
 }
 
 #success {
