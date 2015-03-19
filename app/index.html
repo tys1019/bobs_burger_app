@@ -159,7 +159,7 @@
         <div class="order-div">
           <h3>Order #{{id}}</h3>
           {{#each items}}
-            <p>{{burger.name}}<p>
+            <p>{{burger.name}} | {{burger.quantity}}<p>
           {{/each}}
           <h4>Total: ${{total_price}} | Ordered on: {{created_at}}</h4>
         </div>
