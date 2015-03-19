@@ -65,6 +65,7 @@ App.loginSuccess = function(userData){
   console.log(userData);
   console.log('logged in!');
   App.hideButtons();
+  window.history.back();
 };
 
 App.setupAjaxRequests = function() {
