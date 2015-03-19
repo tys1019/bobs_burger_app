@@ -1,5 +1,5 @@
 <div id=checkout-form> <h1>Checkout</h1> <form action="" method=POST id=payment-form> <span class=payment-errors></span> <div class=form-group> <label> <span>Card Number</span><br> <input size=20 data-stripe="number"> </label> </div> <div class=form-group> <label> <span>CVC</span><br> <input size=4 data-stripe="cvc"> </label> </div> <div class=form-group> <label> <span>Expiration (MM/YYYY)</span> <input size=2 data-stripe="exp-month"> </label> <span> / </span> <input size=4 data-stripe="exp-year"> </div> <div class=form-group> <input type=radio name=get-food value=Pickup>Pickup<br> <input type=radio name=get-food value=Delivery>Delivery <input id=zip-box hidden size=5 placeholder=Zip pattern=\b(021[0-1][013489])|(02210)\b|\b(02[14][3-4][1234569])\b title="Sorry, you are outside of our delivery area."> </div> <button type=submit>Submit Payment</button> </form> </div> <script type=text/x-handlebars-template id=checkout><div id="checkout-handlebar">
-      <h2>Total Price: <span id=total-price>${{totalPrice}}</span></h2>
+      <h2>Total Price: $<span id=total-price>{{totalPrice}}</span></h2>
 
       {{#each array}}
         <div id="burger-{{@key}}">

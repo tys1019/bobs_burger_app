@@ -89,7 +89,9 @@ var AppRouter = Backbone.Router.extend({
     }).done(function(orders){
 
       orders.forEach(function(order){
+        var totalPrice = order.total_price;
         order.items = JSON.parse(order.items);
+        order.total_price = parseFloat(totalPrice).toFixed(2);
       });
 
       var template = Handlebars.compile($('#orderIndexTemplate').html());
