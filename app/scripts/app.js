@@ -163,7 +163,7 @@ var AppRouter = Backbone.Router.extend({
         });
 
         var finalPrice = premiumArray.length + defaultPrice;
-        debugger;
+
         var cart;
         localStorage.cart ? cart = JSON.parse(localStorage.cart) : cart = [];
 
