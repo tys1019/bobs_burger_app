@@ -23,6 +23,8 @@ var AppRouter = Backbone.Router.extend({
       var template = Handlebars.compile($('#homeTemplate').html());
       $('#container').append(template());
 
+      App.hideButtons();
+
 
     $('a').on('click', function(){
       if (!$(this).hasClass('not-clear')) {
