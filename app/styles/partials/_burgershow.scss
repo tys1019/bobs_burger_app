@@ -22,5 +22,11 @@
   margin-top: 20px;
   height: 400px;
   width: 300px;
+  @media only screen  and (min-width : 770px) and (max-width : 1200px) {
+    height: 450px;
+  }
+  @media only screen  and (max-width : 769px) {
+    height: 540px;
+  }
 }
 
