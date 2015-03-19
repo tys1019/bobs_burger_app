@@ -234,15 +234,10 @@ var AppRouter = Backbone.Router.extend({
                               array[i] = $(this).val();
                               return array;
                             });
-        var array = [];
-        var $selected = $('input:checked').map(function(i){
-                              array[i] = $(this).val();
-                              return array;
-                            });
 
         var defaultPrice = 6.50;
         var premiumArray = [];
-        var addPremium = $('div#premium input:checked').map(function(i){
+        var addPremium = $('div#collapse-premium input:checked').map(function(i){
           premiumArray[i] = $(this).val();
         });
 
@@ -262,6 +257,7 @@ var AppRouter = Backbone.Router.extend({
 
         $('input:checked').prop('checked', false);
         $('#burger-name-input').val('');
+        App.loadCart();
 
         window.location.hash = "#/burgers";
 
