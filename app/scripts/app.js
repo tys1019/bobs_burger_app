@@ -182,6 +182,8 @@ var AppRouter = Backbone.Router.extend({
 
         $('input:checked').prop('checked', false);
         $('#burger-name-input').val('');
+        App.loadCart();
+
         window.location.hash = "#/burgers";
 
 
