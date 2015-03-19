@@ -159,7 +159,7 @@ var AppRouter = Backbone.Router.extend({
 
         var defaultPrice = 6.50;
         var premiumArray = [];
-        var addPremium = $('div#premium input:checked').map(function(i){
+        var addPremium = $('div#collapse-premium input:checked').map(function(i){
           premiumArray[i] = $(this).val();
         });
 
@@ -289,7 +289,7 @@ var AppRouter = Backbone.Router.extend({
         sendOrderToServer(token);
         // and submit
         $('#container').fadeOut(function(){
-          $(this).html($('<div id=success>ORDER SUBMITTED!</div>')).fadeIn();
+          $(this).html($('<h1 id=success>ORDER SUBMITTED! Thank You!</h1>')).fadeIn();
         });
       }
     };
