@@ -396,9 +396,9 @@ App.deliveryCheck = function(totalPrice){
   $('#zip-box').keyup(function(){
     var zip = $(this).val();
     if (zip.match(/\b(021[0-1][013489])|(02210)\b/g)) {
-      $('#total-price').text(totalPrice + 6);
+      $('#total-price').text(parseFloat(totalPrice) + 6.00);
     } else if (zip.match(/\b(02[14][3-4][1234569])\b/g)) {
-      $('#total-price').text(totalPrice + 10);
+      $('#total-price').text(parseFloat(totalPrice) + 10.00);
     } else {
       $('#total-price').text(totalPrice);
     }
