@@ -276,6 +276,7 @@ var AppRouter = Backbone.Router.extend({
     for (var i = 0; i < cart.length; i++) {
       totalPrice += cart[i].burger.price * cart[i].burger.quantity;
     };
+    totalPrice = parseFloat(totalPrice).toFixed(2);
 
     var stripeResponseHandler = function(status, response) {
       var $form = $('#payment-form');
