@@ -158,12 +158,12 @@ var AppRouter = Backbone.Router.extend({
 
         var defaultPrice = 6.50;
         var premiumArray = [];
-        var addPremium = $('div#premium input:checked').map(function(i){
+        var addPremium = $('div#collapse-premium input:checked').map(function(i){
           premiumArray[i] = $(this).val();
         });
 
         var finalPrice = premiumArray.length + defaultPrice;
-
+        debugger;
         var cart;
         localStorage.cart ? cart = JSON.parse(localStorage.cart) : cart = [];
 
