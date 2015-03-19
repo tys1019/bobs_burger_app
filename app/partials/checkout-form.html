@@ -38,12 +38,12 @@
 
     <script type="text/x-handlebars-template" id="checkout">
     <div id="checkout-handlebar">
-      <p>Total Price: <span id=total-price>{{totalPrice}}</span></p>
+      <h2>Total Price: <span id=total-price>${{totalPrice}}</span></h2>
 
       {{#each array}}
         <div id="burger-{{@key}}">
           {{#each this}}
-            <p>{{name}}: {{quantity}}</p>
+            <h4>{{name}}: {{quantity}}</h4>
           {{/each}}
         </div>
       {{/each}}
