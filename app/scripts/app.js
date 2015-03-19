@@ -276,6 +276,7 @@ var AppRouter = Backbone.Router.extend({
     for (var i = 0; i < cart.length; i++) {
       totalPrice += cart[i].burger.price * cart[i].burger.quantity;
     };
+    totalPrice = parseFloat(totalPrice).toFixed(2);
 
     var stripeResponseHandler = function(status, response) {
       var $form = $('#payment-form');
@@ -303,7 +304,7 @@ var AppRouter = Backbone.Router.extend({
         data: { order: {
             items: localStorage.cart,
             stripe_token: token,
-            total_price: $('#total-price').text()
+            total_price: parseFloat($('#total-price').text())
           }
         },
         headers: {"AUTHORIZATION": "Token token=" + localStorage.authToken }
@@ -426,6 +427,7 @@ App.loadCart = function(){
     for (var i = 0; i < cart.length; i++) {
       totalPrice += cart[i].burger.price * cart[i].burger.quantity;
     };
+    totalPrice = parseFloat(totalPrice).toFixed(2);
 
     var template = Handlebars.compile($('#shoppingCart').html());
     $('#slider').html(template({
