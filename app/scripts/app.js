@@ -22,7 +22,6 @@ var AppRouter = Backbone.Router.extend({
 
       var template = Handlebars.compile($('#homeTemplate').html());
       $('#container').append(template());
-
       App.hideButtons();
 
 
@@ -469,6 +468,7 @@ $(document).ready(function(){
   Backbone.history.start();
   App.menuToggle();
   App.loadCart();
+  App.hideButtons();
 });
 
 
