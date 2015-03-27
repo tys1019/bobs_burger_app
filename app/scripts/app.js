@@ -419,6 +419,11 @@ App.menuToggle = function(){
     $('#slider').toggleClass('cbp-spmenu-open' );
 
   });
+
+    $('.wrapper').on('click', function(){
+      $('body').removeClass('cbp-spmenu-push-toleft' );
+      $('#slider').removeClass('cbp-spmenu-open' );
+    });
 };
 
 App.loadCart = function(){
