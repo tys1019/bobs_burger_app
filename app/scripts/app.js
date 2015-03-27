@@ -40,7 +40,6 @@ var AppRouter = Backbone.Router.extend({
       url: App.apiLocation + 'burgers',
       type: 'GET'
     }).done(function(data){
-      console.log(data);
       data.forEach(function(e) { (e.price = parseFloat(e.price).toFixed(2)) } );
       var template = Handlebars.compile($('#burgerIndexTemplate').html());
       $('#container').html(template({

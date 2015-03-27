@@ -62,7 +62,6 @@ var authToken = localStorage.getItem('authToken');
 
 App.loginSuccess = function(userData){
   localStorage.setItem('authToken', userData.token);
-  console.log(userData);
   console.log('logged in!');
   App.hideButtons();
   window.location.hash = "#/burgers";
